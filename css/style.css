@@ -2,12 +2,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
+
+
+
 
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
-
+    /* ✅ Adjust this value to control how far from the top the section appears */
 }
 
 body {
@@ -17,6 +21,23 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     width: 100%;
+    cursor: none;
+}
+
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: white;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    /* ensures clicks pass through */
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    /* smooth movement */
 }
 
 .btn {
@@ -89,6 +110,7 @@ nav {
 }
 
 .logo img {
+
     min-width: 40px;
     max-width: 80px;
 }
@@ -939,5 +961,4 @@ footer {
     .project-image {
         height: 200px;
     }
-
 }
