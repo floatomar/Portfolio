@@ -16,6 +16,7 @@ body {
     color: #fff;
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
 }
 
 .btn {
@@ -29,6 +30,9 @@ body {
     font-weight: 500;
     transition: all 0.3s ease;
     cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .btn:hover {
@@ -81,11 +85,13 @@ nav {
     align-items: center;
     max-width: 1400px;
     margin: 0 auto;
+    width: 100%;
 }
-
 
 .logo img {
     width: 10%;
+    min-width: 40px;
+    max-width: 80px;
 }
 
 .hamburger {
@@ -93,8 +99,8 @@ nav {
     font-size: 26px;
     color: #fff;
     cursor: pointer;
+    z-index: 1001;
 }
-
 
 /*Hero Section*/
 .hero {
@@ -105,12 +111,17 @@ nav {
     justify-content: center;
     align-items: flex-start;
     text-align: center;
-    padding-top: 170px;
-    padding-bottom: 80px;
-    overflow: visible;
-
+    padding: 170px 20px 80px;
+    overflow: hidden;
 }
 
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
 .hero-badge {
     background: rgba(255, 255, 255, 0.08);
@@ -132,21 +143,22 @@ nav {
 }
 
 .hero p {
-    font-size: 18px;
+    font-size: clamp(16px, 2.5vw, 18px);
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 45px;
     max-width: 650px;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.6;
+    padding: 0 10px;
 }
-
 
 .hero-buttons {
     display: flex;
     gap: 20px;
     justify-content: center;
     margin-bottom: 80px;
+    flex-wrap: wrap;
 }
 
 .video-background {
@@ -157,19 +169,32 @@ nav {
     height: 100%;
     overflow: hidden;
     z-index: -1;
-
 }
 
 .video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translateX(-50%) translateY(-50%);
+    object-fit: cover;
+}
+
+/* Fallback for mobile devices that don't support autoplay */
+.video-background::after {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    z-index: -1;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    z-index: -2;
 }
-
 
 .pulsing-dot {
     animation: pulse 1.5s infinite;
@@ -180,15 +205,12 @@ nav {
     0%,
     100% {
         color: #ffffff;
-        /* bright */
     }
 
     50% {
         color: #aaaaaa;
-        /* darker */
     }
 }
-
 
 /* Meet Omar Section */
 .meet-omar {
@@ -199,28 +221,39 @@ nav {
     grid-template-columns: 1.2fr 1fr;
     gap: 100px;
     align-items: center;
+    width: 100%;
 }
 
 .meet-omar-content h2 {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 300;
     margin-bottom: 30px;
     letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.meet-omar-content h2 img {
+    width: 23%;
+    min-width: 60px;
+    max-width: 120px;
 }
 
 .meet-omar-content .subtitle {
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 35px;
     line-height: 1.7;
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
 }
-
 
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-bottom: 40px;
+    width: 100%;
 }
 
 .skill-item {
@@ -230,19 +263,20 @@ nav {
     font-size: 13px;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.08);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-
-
 
 .experience-table {
     display: flex;
     flex-direction: column;
     max-width: 700px;
     margin: 40px auto;
-
     font-size: 15px;
     border-radius: 12px;
     overflow: hidden;
+    width: 100%;
 }
 
 .experience-table .exp-header,
@@ -251,6 +285,7 @@ nav {
     grid-template-columns: 1fr 1fr 100px;
     gap: 20px;
     padding: 14px 20px;
+    min-width: 0;
 }
 
 .experience-table .exp-header {
@@ -270,6 +305,11 @@ nav {
     transition: background 0.25s ease;
 }
 
+.experience-table span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .profile-section {
     display: flex;
@@ -277,11 +317,31 @@ nav {
     align-items: center;
 }
 
+.profile-image {
+    transition: filter 0.3s ease, transform 0.3s ease;
+    filter: grayscale(100%);
+    width: 100%;
+    max-width: 400px;
+}
+
+.profile-image:hover {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.profile-image img {
+    width: 100%;
+    height: auto;
+    border-radius: inherit;
+    object-fit: contain;
+    object-position: center;
+}
 
 /* Process Section */
 .process {
     background: rgba(255, 255, 255, 0.02);
     padding: 120px 50px 0px;
+    width: 100%;
 }
 
 .process-container {
@@ -291,6 +351,7 @@ nav {
     grid-template-columns: 1fr 1fr;
     gap: 100px;
     align-items: center;
+    width: 100%;
 }
 
 .process-image {
@@ -299,6 +360,12 @@ nav {
     overflow: hidden;
     filter: grayscale(100%);
     transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.process-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .process-image:hover {
@@ -317,7 +384,7 @@ nav {
 }
 
 .process-content h2 {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 300;
     margin-bottom: 20px;
     letter-spacing: -1px;
@@ -327,13 +394,14 @@ nav {
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 50px;
     line-height: 1.6;
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
 }
 
 .process-buttons {
     display: flex;
     gap: 15px;
     margin-bottom: 50px;
+    flex-wrap: wrap;
 }
 
 .process-step {
@@ -365,17 +433,24 @@ nav {
 }
 
 /* Projects Section Styles */
+.projects {
+    padding-top: 100px;
+    background: rgba(255, 255, 255, 0.02);
+    width: 100%;
+}
+
 .projects-grid {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0px 50px 80px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 60px;
+    width: 100%;
 }
 
 .recent-work h3 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 300;
     margin-bottom: 30px;
     letter-spacing: -1px;
@@ -384,11 +459,11 @@ nav {
 .recent-work-content {
     color: rgba(255, 255, 255, 0.7);
     line-height: 1.6;
-    font-size: 15px;
+    font-size: clamp(13px, 2vw, 15px);
 }
 
 .projects-grid a {
-    font-style: none;
+    text-decoration: none;
     color: white;
 }
 
@@ -397,6 +472,7 @@ nav {
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .project-card:hover {
@@ -404,9 +480,15 @@ nav {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-.project-image img {
+.project-image {
     width: 100%;
     height: 260px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease, filter 0.4s ease;
 }
@@ -415,19 +497,16 @@ nav {
     transform: scale(1.1);
 }
 
-
-
-
-
 /* FAQ Section */
 .faq {
     padding: 120px 50px;
     max-width: 900px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .faq h2 {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 300;
     margin-bottom: 25px;
     letter-spacing: -1px;
@@ -436,7 +515,7 @@ nav {
 .faq-subtitle {
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 70px;
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
     line-height: 1.6;
 }
 
@@ -445,6 +524,7 @@ nav {
     padding: 35px 0;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .faq-item:hover {
@@ -455,7 +535,7 @@ nav {
 }
 
 .faq-question {
-    font-size: 17px;
+    font-size: clamp(15px, 2.5vw, 17px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -466,13 +546,15 @@ nav {
     font-size: 20px;
     color: rgba(255, 255, 255, 0.6);
     transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 15px;
 }
 
 .faq-answer {
     margin-top: 20px;
     color: rgba(255, 255, 255, 0.7);
     line-height: 1.6;
-    font-size: 15px;
+    font-size: clamp(13px, 2vw, 15px);
     display: none;
 }
 
@@ -489,10 +571,11 @@ nav {
     background: rgba(255, 255, 255, 0.02);
     padding: 120px 50px;
     text-align: center;
+    width: 100%;
 }
 
 .contact h2 {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 300;
     margin-bottom: 60px;
     letter-spacing: -1px;
@@ -529,7 +612,7 @@ footer {
     color: rgba(255, 255, 255, 0.5);
     font-size: 14px;
     background-color: #111;
-    /* Optional, just to highlight white icons */
+    width: 100%;
 }
 
 .social-links {
@@ -537,9 +620,8 @@ footer {
     display: flex;
     justify-content: center;
     gap: 25px;
+    flex-wrap: wrap;
 }
-
-
 
 .social-links a {
     display: inline-flex;
@@ -586,26 +668,14 @@ footer {
     color: white;
 }
 
-
-.profile-image {
-    transition: filter 0.3s ease, transform 0.3s ease;
-    filter: grayscale(100%);
-}
-
-
-.profile-image:hover {
-    filter: grayscale(0%);
-
-    transform: scale(1.1);
-}
-
-
-
 /* Responsive Design */
-/* Mobile menu */
 @media (max-width: 1024px) {
+    .hero {
+        padding: 150px 30px 60px;
+    }
+
     .hero h1 {
-        font-size: 4rem;
+        font-size: clamp(2rem, 6vw, 4rem);
     }
 
     .meet-omar,
@@ -615,8 +685,30 @@ footer {
         text-align: center;
     }
 
+    .process-content {
+        padding-left: 0;
+    }
+
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
+        max-width: 400px;
+        margin: 40px auto;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .experience-table {
+        font-size: 14px;
+    }
+
+    .experience-table .exp-header,
+    .experience-table .exp-row {
+        grid-template-columns: 1fr 1fr 80px;
+        gap: 15px;
+        padding: 12px 15px;
     }
 }
 
@@ -627,14 +719,12 @@ footer {
 
     .hamburger {
         display: block;
-        /* show hamburger */
     }
 
     .nav-links {
         position: absolute;
         top: 70px;
-        /* below nav */
-        right: 0;
+        right: 30px;
         width: 200px;
         background: rgba(0, 0, 0, 0.95);
         flex-direction: column;
@@ -642,12 +732,12 @@ footer {
         padding: 20px;
         border-radius: 8px;
         display: none;
-        /* hidden by default */
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .nav-links.active {
         display: flex;
-        /* show when active */
     }
 
     .nav-links a {
@@ -655,61 +745,199 @@ footer {
         color: #fff;
     }
 
-    .hero h1 {
-        font-size: 3rem;
+    .hero {
+        padding: 140px 20px 60px;
     }
 
-    .hero-content {
-        padding: 0 30px;
+    .hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+        letter-spacing: -2px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 250px;
     }
 
     .meet-omar,
     .process,
     .faq,
     .contact {
-        padding: 80px 30px;
+        padding: 80px 20px;
     }
 
-    .profile-image {
-        width: 250px;
-        height: 250px;
+    .projects {
+        padding-top: 80px;
     }
 
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        gap: 15px;
+    .projects-grid {
+        padding: 0 20px 60px;
+        gap: 40px;
     }
 
     .meet-omar {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 40px;
     }
 
     .profile-section {
         order: -1;
-        text-align: center;
     }
 
-    .profile-section img {
-        max-width: 80%;
-        height: auto;
+    .profile-image {
+        max-width: 250px;
         margin: 0 auto;
     }
 
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 300px;
     }
 
+    .skill-item {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .experience-table {
+        margin: 30px 0;
+        font-size: 13px;
+    }
+
+    .experience-table .exp-header,
+    .experience-table .exp-row {
+        grid-template-columns: 1fr 1fr 70px;
+        gap: 10px;
+        padding: 10px 12px;
+    }
+
+    .experience-table .exp-header {
+        font-size: 11px;
+    }
+
+    .process-buttons {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .process-buttons .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .faq-item {
+        padding: 25px 0;
+    }
+
+    .faq-item:hover {
+        margin: 0 -15px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .social-links {
+        gap: 20px;
+    }
+
+    .social-links a {
+        width: 45px;
+        height: 45px;
+    }
+
+    .feather {
+        width: 20px;
+        height: 20px;
+    }
 }
 
-
-
 @media (max-width: 480px) {
+    .hero {
+        padding: 130px 15px 50px;
+    }
+
+    .hero-badge {
+        font-size: 12px;
+        padding: 10px 16px;
+        margin-bottom: 25px;
+    }
+
+    .hero h1 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        font-size: 16px;
+        margin-bottom: 35px;
+        padding: 0 5px;
+    }
+
+    .meet-omar,
+    .process,
+    .faq,
+    .contact {
+        padding: 60px 15px;
+    }
+
+    .projects-grid {
+        padding: 0 15px 50px;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
     .skills-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        max-width: 100%;
+    }
+
+    .skill-item {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .experience-table .exp-header,
+    .experience-table .exp-row {
+        grid-template-columns: 1fr 1fr 60px;
+        gap: 8px;
+        padding: 8px 10px;
+    }
+
+    .nav-links {
+        right: 15px;
+        width: 180px;
+    }
+
+    .logo img {
+        min-width: 35px;
+    }
+
+    .meet-omar-content h2 img {
+        min-width: 50px;
+    }
+
+    .social-links {
+        gap: 15px;
+    }
+
+    .social-links a {
+        width: 40px;
+        height: 40px;
+    }
+
+    .feather {
+        width: 18px;
+        height: 18px;
+    }
+
+    .project-image {
+        height: 200px;
     }
 }
