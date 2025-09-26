@@ -7,7 +7,7 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
-    /* ✅ Adjust this value to control how far from the top the section appears */
+
 }
 
 body {
@@ -89,7 +89,6 @@ nav {
 }
 
 .logo img {
-    width: 10%;
     min-width: 40px;
     max-width: 80px;
 }
@@ -940,4 +939,5 @@ footer {
     .project-image {
         height: 200px;
     }
+
 }
