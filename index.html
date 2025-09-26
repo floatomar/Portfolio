@@ -32,7 +32,7 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-content">
-            <div class="logo"><img src="assets/logo.png" alt="Logo" /></div>
+            <div class="logo"><a href="#hero"><img src="assets/logo.png" alt="Logo" /></a></div>
 
             <!-- Hamburger -->
             <div class="hamburger" onclick="toggleMenu()">☰</div>
@@ -48,7 +48,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="video-background">
             <video autoplay loop muted playsinline>
                 <source src="assets/wave-animation.mp4" type="video/mp4" />
@@ -67,6 +67,11 @@
             </div>
         </div>
     </section>
+
+
+    <!-- Projects Section -->
+
+
 
     <!-- Meet Omar Section -->
     <section class="meet-omar" id="about">
@@ -111,13 +116,15 @@
                     style="display: block; width: 100%; height: 100%; border-radius: inherit; object-fit: contain; object-position: center; " />
             </div>
         </div>
+
     </section>
+
 
     <!-- Process Section -->
     <section class="process" id="process">
         <div class="process-container">
             <div class="process-image">
-                <img src="assets/mockup-design.jpg" alt="Design Mockup" />
+                <img src="assets/mockup-design.jpg" alt="Design Mockup" draggable="false" />
             </div>
 
             <div class="process-content">
@@ -128,7 +135,7 @@
 
                 <div class="process-buttons">
                     <a href="#" class="btn">Book a Free Call</a>
-                    <a href="#" class="btn">See Portfolio</a>
+                    <a href="#projects" class="btn" id="see-projects">See Projects</a>
                 </div>
 
                 <div class="process-step">
@@ -155,6 +162,41 @@
                 </div>
             </div>
         </div>
+        <br><br>
+        <br><br><br><br>
+        <section class="projects-grid" id="projects">
+
+            <div class="recent-work">
+                <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="4" width="18" height="16" stroke="white" stroke-width="2" rx="2" ry="2" />
+                        <line x1="3" y1="10" x2="21" y2="10" stroke="white" stroke-width="2" />
+                        <line x1="7" y1="14" x2="17" y2="14" stroke="white" stroke-width="2" />
+                        <line x1="7" y1="18" x2="13" y2="18" stroke="white" stroke-width="2" />
+                    </svg>
+                    Recent Works </h3>
+                <p class="recent-work-content">A selection of software engineering projects showcasing skills in
+                    full-stack development, algorithm design, and scalable solutions. These projects highlight practical
+                    experience with modern technologies and clean, efficient code.</p>
+            </div>
+            <a href="https://www.figma.com/design/jZrSVjroRfsxSfpeNZOCSc/Pulse?node-id=0-1&t=zQhSIx382LRmRDEp-1">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/pulse-logo.png" alt="Project 1">
+                    </div>
+
+                </div>
+            </a>
+            <a href="https://codelendo.runasp.net/">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/codelendo-logo.png" alt="Project 1">
+                    </div>
+
+                </div>
+            </a>
+
+
+        </section>
     </section>
 
     <!-- FAQ Section -->
@@ -221,14 +263,53 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <h2>Let's start the journey with me</h2>
-        <a href="#" class="contact-btn">Book a Free Call</a>
+        <div>
+
+            <div class="social-links">
+                <a href="mailto:omar-abdulmajeed@outlook.sa" aria-label="Email" target="_blank">
+                    <svg class="feather" viewBox="0 0 24 24">
+                        <path d="m4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2h-16c-1.1 0-2-.9-2-2v-12c0-1.1.9-2 2-2z">
+                        </path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/omarabdulmajeed" target="_blank" aria-label="LinkedIn">
+                    <svg class="feather" viewBox="0 0 24 24">
+                        <path d="m16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="https://github.com/floatomar" target="_blank" aria-label="GitHub">
+                    <svg class="feather" viewBox="0 0 24 24">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </a>
+                <a href="tel:+966550429857" aria-label="Phone">
+                    <svg class="feather" viewBox="0 0 24 24">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <button class="download-resume" onclick="downloadResume()">Download Resume</button>
+
     </section>
 
     <!-- Footer -->
     <footer>
         <p>omar-abdulmajeed@outlook.sa</p>
+
+
+
+
         <p>All rights reserved. 2025 ©</p>
     </footer>
+
 </body>
 
 </html>
