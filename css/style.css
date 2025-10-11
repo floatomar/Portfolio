@@ -190,6 +190,9 @@ nav {
     height: 100%;
     overflow: hidden;
     z-index: -1;
+    background: #000;
+    background-size: cover;
+    background-position: center;
 }
 
 .video-background video {
@@ -200,12 +203,11 @@ nav {
     min-height: 100%;
     width: auto;
     height: auto;
-    z-index: -1;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translate(-50%, -50%);
     object-fit: cover;
+    z-index: -1;
 }
 
-/* Fallback for mobile devices that don't support autoplay */
 .video-background::after {
     content: '';
     position: absolute;
