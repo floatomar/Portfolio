@@ -51,11 +51,15 @@
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="video-background">
-            <video autoplay loop muted playsinline>
-                <source src="assets/wave-animation.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
+            <!-- Video element for desktop -->
+            <video autoplay loop muted playsinline class="bg-video">
+                <source src="assets/wave-animation.mp4" type="video/mp4">
             </video>
+
+            <!-- GIF fallback for small devices -->
+            <img src="assets/wave-fallback.gif" class="bg-gif" alt="Background GIF">
         </div>
+
 
         <div class="hero-content">
             <div class="hero-badge"><span class="pulsing-dot">⦿</span> Creating unique brand experiences</div>
@@ -68,6 +72,7 @@
             </div>
         </div>
     </section>
+
 
 
 
