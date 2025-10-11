@@ -339,8 +339,8 @@ nav {
 }
 
 .profile-image {
+
     transition: filter 0.3s ease, transform 0.3s ease;
-    filter: grayscale(100%);
     width: 100%;
     max-width: 400px;
 }
@@ -351,6 +351,7 @@ nav {
 }
 
 .profile-image img {
+
     width: 100%;
     height: auto;
     border-radius: inherit;
@@ -730,6 +731,15 @@ footer {
         grid-template-columns: 1fr 1fr 80px;
         gap: 15px;
         padding: 12px 15px;
+    }
+
+    .cursor {
+        display: none;
+    }
+
+    body {
+        cursor: auto;
+        /* restore default system cursor */
     }
 }
 
