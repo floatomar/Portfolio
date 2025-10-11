@@ -190,9 +190,9 @@ nav {
     height: 100%;
     overflow: hidden;
     z-index: -1;
-    background: #000;
-    background-size: cover;
-    background-position: center;
+
+    /* fallback for small devices */
+    background: url('assets/wave-fallback.gif') center center / cover no-repeat;
 }
 
 .video-background video {
@@ -203,11 +203,12 @@ nav {
     min-height: 100%;
     width: auto;
     height: auto;
+    z-index: -1;
     transform: translate(-50%, -50%);
     object-fit: cover;
-    z-index: -1;
 }
 
+/* optional dark overlay */
 .video-background::after {
     content: '';
     position: absolute;
@@ -218,6 +219,8 @@ nav {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     z-index: -2;
 }
+
+
 
 .pulsing-dot {
     animation: pulse 1.5s infinite;
@@ -741,7 +744,11 @@ footer {
 
     body {
         cursor: auto;
-        /* restore default system cursor */
+
+    }
+
+    .video-background video {
+        display: none;
     }
 }
 

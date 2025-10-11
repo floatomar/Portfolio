@@ -93,35 +93,3 @@ document.addEventListener("mousemove", (e) => {
     cursor.style.top = `${e.clientY}px`;
     cursor.style.left = `${e.clientX}px`;
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-    const video = document.getElementById("bg-video");
-    const videoBg = document.getElementById("video-bg");
-
-    // Define your small GIF fallback
-    const gifFallback = "assets/wave-fallback.gif";
-
-    // Define breakpoint for mobile/tablet
-    const maxMobileWidth = 1024;
-
-    // Function to use GIF fallback
-    function useGifFallback() {
-        if (video) video.remove(); // remove video element entirely
-        videoBg.style.backgroundImage = `url('${gifFallback}')`;
-        videoBg.style.backgroundSize = "cover";
-        videoBg.style.backgroundPosition = "center";
-    }
-
-    // If device width is small, use GIF directly
-    if (window.innerWidth <= maxMobileWidth) {
-        useGifFallback();
-        return;
-    }
-
-    // Try to autoplay the video; if fails (e.g. iPhone Safari), fallback to GIF
-    if (video) {
-        video.play().catch(() => {
-            useGifFallback();
-        });
-    }
-});
