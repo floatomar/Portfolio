@@ -343,24 +343,31 @@ nav {
 }
 
 .profile-image {
-
-    transition: filter 0.3s ease, transform 0.3s ease;
+    background: #121212;
+    border-radius: 50%;
     width: 100%;
     max-width: 400px;
-}
-
-.profile-image:hover {
-    filter: grayscale(0%);
-    transform: scale(1.1);
+    transition: transform 0.4s ease;
 }
 
 .profile-image img {
-
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     border-radius: inherit;
-    object-fit: contain;
-    object-position: center;
+    filter: grayscale(100%) contrast(120%) brightness(90%) sepia(10%);
+    transition: filter 0.4s ease;
+}
+
+/* On hover: scale container + remove grayscale from image */
+.profile-image:hover {
+    transform: scale(1.1);
+
+    /* zooms both image and background */
+}
+
+.profile-image:hover img {
+    filter: grayscale(0%) contrast(110%) brightness(100%)saturate(120%) sepia(0%);
 }
 
 /* Process Section */
