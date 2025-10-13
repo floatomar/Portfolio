@@ -359,16 +359,13 @@ nav {
     transition: filter 0.4s ease;
 }
 
-/* On hover: scale container + remove grayscale from image */
+
 .profile-image:hover {
     transform: scale(1.1);
 
-    /* zooms both image and background */
+
 }
 
-.profile-image:hover img {
-    filter: grayscale(0%) contrast(110%) brightness(100%)saturate(120%) sepia(0%);
-}
 
 /* Process Section */
 .process {
@@ -984,4 +981,5 @@ footer {
     .project-image {
         height: 200px;
     }
+
 }
