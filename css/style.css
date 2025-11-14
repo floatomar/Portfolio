@@ -6,12 +6,9 @@
 }
 
 
-
-
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
-    /* ✅ Adjust this value to control how far from the top the section appears */
 }
 
 body {
@@ -1051,6 +1048,13 @@ footer {
     .nav-links a {
         font-size: 16px;
         color: #fff;
+    }
+
+
+    [dir="rtl"] .nav-links {
+        right: auto;
+        left: 30px;
+        text-align: right;
     }
 
     .hero {
