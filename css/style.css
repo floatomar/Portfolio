@@ -24,6 +24,172 @@ body {
     cursor: none;
 }
 
+/* Language Switcher Styles */
+.language-switcher {
+    position: relative;
+    display: inline-block;
+}
+
+.language-toggle {
+    background: none;
+    border: none;
+
+    cursor: pointer;
+    padding: 8px 12px;
+
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.language-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.language-toggle svg {
+
+    height: 13px;
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgb(14 14 14 / 95%);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 8px;
+    margin-top: 8px;
+    min-width: 150px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.language-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.language-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.language-option.active {
+    background: rgba(96, 165, 250, 0.2);
+    color: #60a5fa;
+}
+
+.language-option .flag {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.language-option .lang-name {
+    flex: 1;
+}
+
+.language-option .checkmark {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.language-option.active .checkmark {
+    opacity: 1;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+    direction: rtl;
+}
+
+[dir="rtl"] .nav-links {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+[dir="rtl"] .language-dropdown {
+    right: auto;
+    left: 0;
+}
+
+[dir="rtl"] .hero-content {
+    text-align: center;
+}
+
+[dir="rtl"] .hero-content h1 {
+    text-align: center;
+}
+
+[dir="rtl"] .hero-content p {
+    text-align: center;
+}
+
+[dir="rtl"] .hero-badge {
+    justify-content: center;
+}
+
+
+[dir="rtl"] .meet-omar-content .subtitle {
+    text-align: center;
+}
+
+[dir="rtl"] .skills-grid {
+    direction: rtl;
+}
+
+[dir="rtl"] .experience-table {
+    direction: rtl;
+}
+
+[dir="rtl"] .process-content {
+    text-align: right;
+}
+
+[dir="rtl"] .process-badge {
+    justify-content: flex-end;
+}
+
+[dir="rtl"] .process-subtitle {
+    text-align: right;
+}
+
+[dir="rtl"] .step-description {
+    text-align: right;
+}
+
+[dir="rtl"] .faq-subtitle {
+    text-align: center;
+}
+
+[dir="rtl"] .recent-work-content {
+    text-align: right;
+}
+
+[dir="rtl"] footer {
+    direction: rtl;
+}
+
+
 .cursor {
     position: fixed;
     top: 0;
@@ -363,8 +529,8 @@ nav {
 .profile-image:hover {
     transform: scale(1.1);
 
-
 }
+
 
 
 /* Process Section */
@@ -698,6 +864,103 @@ footer {
     color: white;
 }
 
+/* Overlay background */
+.resume-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Popup box */
+.resume-popup {
+    background: #111;
+    padding: 30px;
+    border-radius: 14px;
+    width: 320px;
+    text-align: center;
+    color: white;
+    position: relative;
+    animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Close button */
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #bbb;
+    transition: 0.2s;
+}
+
+.close-popup:hover {
+    color: #fff;
+}
+
+/* Buttons inside popup */
+.popup-btn {
+    display: block;
+    padding: 10px 25px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 10px 0;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.popup-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.popup-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 20px;
+}
+
+
+.popup-download-icon {
+    width: 20px;
+    height: 20px;
+    stroke: rgba(255, 255, 255, 0.6);
+    stroke-width: 2;
+    fill: none;
+    flex-shrink: 0;
+}
+
+.popup-btn:hover .popup-download-icon {
+    stroke: white;
+}
+
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .hero {
@@ -756,6 +1019,10 @@ footer {
 @media (max-width: 768px) {
     nav {
         padding: 20px 30px;
+    }
+
+    .language-toggle {
+        padding: 6px 10px;
     }
 
     .hamburger {
@@ -981,5 +1248,4 @@ footer {
     .project-image {
         height: 200px;
     }
-
 }

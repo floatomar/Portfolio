@@ -78,15 +78,20 @@ document.querySelectorAll('.meet-omar, .projects-hero, .projects-grid, .process,
     section.style.transition = 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     observer.observe(section);
 });
-
 function downloadResume() {
-    const link = document.createElement('a');
-    link.href = 'assets/Omar_Abdulmajeed_Resume.pdf';
-    link.download = 'Omar_Abdulmajeed_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    document.getElementById("resume-popup").style.display = "flex";
 }
+
+function hideResumePopup() {
+    document.getElementById("resume-popup").style.display = "none";
+}
+
+function closeResumePopup(event) {
+    if (event.target.id === "resume-popup") {
+        hideResumePopup();
+    }
+}
+
 const cursor = document.querySelector(".cursor");
 
 document.addEventListener("mousemove", (e) => {
