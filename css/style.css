@@ -506,10 +506,10 @@ nav {
 }
 
 .profile-image {
-    background: #121212;
-    border-radius: 50%;
+
+
     width: 100%;
-    max-width: 400px;
+
     transition: transform 0.4s ease;
 }
 
