@@ -1,4 +1,63 @@
 
+// Mobile Navigation JavaScript
+(function () {
+    const toggleBtn = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileOverlay');
+    const closeBtn = document.getElementById('closeMobileMenu');
+    const hamburger = toggleBtn ? toggleBtn.querySelector('.hamburger') : null;
+
+    function openMenu() {
+        mobileMenu.classList.add('active');
+        overlay.classList.add('active');
+        if (hamburger) hamburger.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        if (hamburger) hamburger.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', openMenu);
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeMenu);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeMenu);
+    }
+
+    // Close menu when clicking a mobile nav link
+    const mobileLinks = document.querySelectorAll('.nav-mobile-links a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            closeMenu();
+            // Smooth scroll to section
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId !== '#') {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    // Handle window resize - close menu if screen becomes desktop
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+            closeMenu();
+        }
+    });
+})();
+
 // Theme Toggle
 function toggleTheme() {
     const body = document.body;

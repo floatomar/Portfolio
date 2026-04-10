@@ -29,7 +29,7 @@
     <nav>
         <div class="nav-left">
             <a href="#" class="nav-logo">
-                <img src="assets/logo.png" alt=" Logo">
+                <img src="assets/logo.png" alt="Logo">
             </a>
             <ul class="nav-links">
                 <li><a href="#experience">Experience</a></li>
@@ -39,10 +39,35 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="nav-mobile-toggle" id="mobileMenuToggle" aria-label="Menu">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+
         <div class="theme-toggle" onclick="toggleTheme()">
             <div class="theme-toggle-slider">🌙</div>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay Background -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="nav-mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="closeMobileMenu">✕</button>
+        <ul class="nav-mobile-links">
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
 
 
     <!-- HERO SECTION  -->

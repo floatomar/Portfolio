@@ -150,6 +150,166 @@
       color: var(--black);
   }
 
+  .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1001;
+      position: relative;
+  }
+
+  .hamburger {
+      width: 28px;
+      height: 20px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  }
+
+  .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--black);
+      transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+      opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Mobile Menu Overlay */
+  .nav-mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 320px;
+      height: 100vh;
+      background: var(--white);
+      backdrop-filter: blur(20px);
+      background: rgba(var(--white-rgb, 255, 255, 255), 0.98);
+      z-index: 1000;
+      padding: 5rem 2rem 2rem;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+  }
+
+  [data-theme="dark"] .nav-mobile-menu {
+      background: rgba(6, 6, 6, 0.98);
+  }
+
+  .nav-mobile-menu.active {
+      right: 0;
+  }
+
+  .nav-mobile-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+  }
+
+  .nav-mobile-links a {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      display: block;
+      border-bottom: 1px solid var(--gray-200);
+      transition: color 0.2s;
+  }
+
+  .nav-mobile-links a:hover {
+      color: var(--gray-600);
+  }
+
+  /* Mobile menu close button */
+  .mobile-menu-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+      color: var(--black);
+  }
+
+  /* Overlay background when menu is open */
+  .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+  }
+
+  /* Desktop nav links hidden on mobile */
+  @media (max-width: 768px) {
+      .nav-links {
+          display: none !important;
+      }
+
+      .nav-mobile-toggle {
+          display: flex !important;
+      }
+
+      .nav-left {
+          flex-direction: row !important;
+          justify-content: space-between !important;
+          width: 100%;
+      }
+  }
+
+  @media (min-width: 769px) {
+
+      .nav-mobile-toggle,
+      .nav-mobile-menu,
+      .mobile-overlay {
+          display: none !important;
+      }
+  }
+
+  /* Ensure nav has proper spacing for mobile */
+  nav {
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+  }
+
+  .nav-mobile-toggle {
+      display: none;
+  }
+
   /* HERO with Canvas BG */
   .hero {
       position: relative;
