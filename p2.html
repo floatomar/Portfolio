@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Daob.sa — Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========
+      Modern minimal (less images, borderless, clean)
+    ========= */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            --t: .25s ease;
+
+            /* Light */
+            --bg: #ffffff;
+            --text: #0f1411;
+            --muted: #58605a;
+            --surface: rgba(15, 20, 17, .04);
+            --surface2: rgba(15, 20, 17, .06);
+
+            --brand: #2aa85f;
+            --brand-soft: rgba(42, 168, 95, .14);
+
+            --shadow: 0 24px 60px rgba(15, 20, 17, .10);
+            --shadow2: 0 10px 24px rgba(15, 20, 17, .10);
+            --radius: 18px;
+            --radius2: 26px;
+
+            --max: 1120px;
+            --pad: 18px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0b0f0d;
+            --text: #eef4ef;
+            --muted: #aab6af;
+            --surface: rgba(255, 255, 255, .06);
+            --surface2: rgba(255, 255, 255, .09);
+            --brand-soft: rgba(42, 168, 95, .18);
+            --shadow: 0 30px 80px rgba(0, 0, 0, .55);
+            --shadow2: 0 14px 34px rgba(0, 0, 0, .45);
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background var(--t), color var(--t);
+        }
+
+        /* subtle glow (modern, no borders) */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(900px 420px at 14% 14%, rgba(42, 168, 95, .12), transparent 60%),
+                radial-gradient(820px 520px at 88% 10%, rgba(79, 172, 254, .10), transparent 60%),
+                radial-gradient(900px 620px at 55% 88%, rgba(240, 147, 251, .07), transparent 60%);
+            opacity: .9;
+        }
+
+        [data-theme="dark"] body::before {
+            opacity: .45
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .container {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 var(--pad);
+            position: relative;
+            z-index: 1
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            backdrop-filter: blur(14px);
+            background: color-mix(in oklab, var(--bg) 88%, transparent);
+            padding: 14px 0;
+            transition: background var(--t);
+        }
+
+        .navRow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 220px;
+            font-weight: 900;
+            letter-spacing: -.02em;
+        }
+
+        .badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-weight: 900;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        }
+
+        .navLinks {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .navLinks a {
+            font-size: 13px;
+            color: var(--muted);
+            transition: color var(--t)
+        }
+
+        .navLinks a:hover {
+            color: var(--text)
+        }
+
+        .navRight {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .iconBtn {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            border: 0;
+            background: var(--surface);
+            color: var(--muted);
+            cursor: pointer;
+            transition: transform .2s ease, background var(--t), color var(--t);
+            display: grid;
+            place-items: center;
+        }
+
+        .iconBtn:hover {
+            transform: translateY(-1px);
+            background: var(--surface2);
+            color: var(--text)
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 44px;
+            padding: 0 16px;
+            border-radius: 999px;
+            border: 0;
+            background: var(--text);
+            color: var(--bg);
+            font-weight: 800;
+            font-size: 13px;
+            transition: transform .2s ease, opacity var(--t);
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: .92
+        }
+
+        .btn.secondary {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .btn.secondary:hover {
+            background: var(--surface2)
+        }
+
+        @media (max-width: 980px) {
+            .navLinks {
+                display: none
+            }
+
+            .brand span.sub {
+                display: none
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: 86px 0
+        }
+
+        .hero {
+            padding-top: 110px;
+            padding-bottom: 36px
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 99px;
+            background: var(--brand);
+            box-shadow: 0 0 0 10px var(--brand-soft);
+        }
+
+        .heroGrid {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: 22px;
+            align-items: center;
+        }
+
+        @media (max-width: 980px) {
+            .heroGrid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* Borderless card style */
+        .card {
+            border: 0;
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow2);
+            overflow: hidden;
+            transition: background var(--t);
+        }
+
+        .pad {
+            padding: 20px
+        }
+
+        h1 {
+            font-size: clamp(2.0rem, 4vw, 3.2rem);
+            font-weight: 350;
+            letter-spacing: -.04em;
+            line-height: 1.08;
+            margin-bottom: 12px;
+        }
+
+        h1 em {
+            font-style: normal;
+            font-weight: 900;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .lead {
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.85;
+            max-width: 75ch
+        }
+
+        /* Minimal meta */
+        .metaRow {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .pill {
+            padding: 10px 12px;
+            border-radius: 999px;
+            background: color-mix(in oklab, var(--surface2) 90%, transparent);
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        .actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        /* Browser mock (one image only) */
+        .browser {
+            border-radius: var(--radius);
+            background: color-mix(in oklab, var(--surface2) 85%, transparent);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 0;
+        }
+
+        .browserTop {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: color-mix(in oklab, var(--surface2) 80%, transparent);
+        }
+
+        .dots {
+            display: flex;
+            gap: 7px
+        }
+
+        .d {
+            width: 10px;
+            height: 10px;
+            border-radius: 99px;
+            background: color-mix(in oklab, var(--muted) 18%, transparent)
+        }
+
+        .url {
+            font-size: 12px;
+            color: var(--muted);
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: color-mix(in oklab, var(--bg) 70%, transparent);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+        }
+
+        .browserBody {
+            padding: 12px
+        }
+
+        .scrollframe {
+            max-height: 520px;
+            overflow: auto;
+            border-radius: 14px;
+            background: color-mix(in oklab, var(--bg) 88%, transparent);
+        }
+
+        .scrollframe img {
+            width: 100%;
+            height: auto;
+            display: block
+        }
+
+        /* Small stats (no big bar, cleaner) */
+        .miniStats {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .miniStat {
+            border-radius: 16px;
+            background: color-mix(in oklab, var(--surface2) 80%, transparent);
+            padding: 12px;
+            text-align: center;
+        }
+
+        .miniStat b {
+            display: block;
+            font-size: 18px;
+            letter-spacing: -.02em
+        }
+
+        .miniStat span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 11px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            font-weight: 900
+        }
+
+        @media (max-width:980px) {
+            .miniStats {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media (max-width:520px) {
+            .miniStats {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* Section head */
+        .sectionHead {
+            display: flex;
+            align-items: flex-end;
+            gap: 14px;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .sectionHead h2 {
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: -.01em;
+        }
+
+        .rule {
+            flex: 1;
+            height: 1px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(42, 168, 95, .75), color-mix(in oklab, var(--muted) 18%, transparent));
+            margin-bottom: 7px;
+            opacity: .9;
+        }
+
+        /* Overview */
+        .grid2 {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 18px;
+            align-items: start
+        }
+
+        @media (max-width:980px) {
+            .grid2 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .klist {
+            list-style: none;
+            margin-top: 14px;
+            display: grid;
+            gap: 10px
+        }
+
+        .klist li {
+            border-radius: 16px;
+            padding: 12px 14px;
+            background: color-mix(in oklab, var(--bg) 70%, transparent);
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .klist li b {
+            color: var(--text)
+        }
+
+        /* Key pages as TABS (one image area only = less images) */
+        .tabs {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 16px;
+            align-items: start;
+            margin-top: 14px;
+        }
+
+        @media (max-width:980px) {
+            .tabs {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .tabList {
+            display: grid;
+            gap: 10px;
+        }
+
+        .tabBtn {
+            text-align: left;
+            border: 0;
+            cursor: pointer;
+            padding: 14px 14px;
+            border-radius: 16px;
+            background: color-mix(in oklab, var(--surface2) 82%, transparent);
+            transition: transform .2s ease, background var(--t);
+            color: var(--text);
+        }
+
+        .tabBtn:hover {
+            transform: translateY(-2px);
+            background: color-mix(in oklab, var(--surface2) 92%, transparent)
+        }
+
+        .tabBtn small {
+            display: block;
+            color: var(--muted);
+            font-weight: 650;
+            margin-top: 6px;
+            line-height: 1.5
+        }
+
+        .tabBtn[aria-selected="true"] {
+            background: linear-gradient(180deg, var(--brand-soft), color-mix(in oklab, var(--surface2) 88%, transparent));
+            box-shadow: var(--shadow2);
+        }
+
+        .viewer {
+            border-radius: var(--radius);
+            background: color-mix(in oklab, var(--surface2) 85%, transparent);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .viewerTop {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .viewerTop b {
+            font-weight: 900
+        }
+
+        .viewerTop span {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .viewerMedia {
+            background: color-mix(in oklab, var(--bg) 90%, transparent);
+        }
+
+        .viewerMedia img {
+            width: 100%;
+            height: auto;
+            display: block
+        }
+
+        /* Interactive clips (keep 4, but compact) */
+        .clips {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 980px) {
+            .clips {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media (max-width: 560px) {
+            .clips {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .clip {
+            border-radius: 18px;
+            background: color-mix(in oklab, var(--surface2) 86%, transparent);
+            box-shadow: var(--shadow2);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .clip .label {
+            font-size: 12px;
+            font-weight: 900;
+            color: var(--muted);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin: 2px 0 10px;
+        }
+
+        .clip .stage {
+            border-radius: 14px;
+            overflow: hidden;
+            background: color-mix(in oklab, var(--bg) 90%, transparent);
+            aspect-ratio: 16 / 10;
+        }
+
+        .clip video,
+        .clip img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Embedded phone section area */
+        .embed {
+            border-radius: var(--radius);
+            background: color-mix(in oklab, var(--surface2) 86%, transparent);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .embedHeader {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .embedHeader b {
+            font-weight: 900
+        }
+
+        .embedHeader span {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .embedBody {
+            padding: 10px
+        }
+
+        /* IMPORTANT: scope any imported Daob styles under .daob-embed */
+        .daob-embed {
+            width: 100%
+        }
+
+        /* Results */
+        .results {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width:980px) {
+            .results {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media (max-width:520px) {
+            .results {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .r {
+            border-radius: 22px;
+            padding: 18px;
+            background: linear-gradient(135deg, rgba(42, 168, 95, .18), color-mix(in oklab, var(--surface2) 88%, transparent));
+            box-shadow: var(--shadow2);
+        }
+
+        .r b {
+            display: block;
+            font-size: 26px;
+            letter-spacing: -.03em
+        }
+
+        .r span {
+            display: block;
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        /* Footer / contact */
+        footer {
+            padding: 36px 0 60px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .contactCard {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAV -->
+    <nav>
+        <div class="container">
+            <div class="navRow">
+                <a class="brand" href="#" onclick="return false;">
+                    <span class="badge">YN</span>
+                    <span class="sub">Daob.sa — Case Study</span>
+                </a>
+
+                <div class="navLinks" aria-label="Page sections">
+                    <a href="#overview">Overview</a>
+                    <a href="#pages">Key Pages</a>
+                    <a href="#interactive">Interactions</a>
+                    <a href="#interface">Interactive Interface</a>
+                    <a href="#results">Results</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <div class="navRight">
+                    <button class="iconBtn" type="button" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+                    <a class="btn secondary" href="https://daob.sa/" target="_blank" rel="noreferrer">Live Site</a>
+                    <a class="btn" href="#contact">Hire Me</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="container">
+            <div class="heroGrid">
+                <section class="card">
+                    <div class="pad">
+                        <div class="eyebrow"><span class="dot"></span> Project spotlight</div>
+                        <h1>Complete digital transformation for a <em>healthy restaurant</em> platform.</h1>
+                        <p class="lead">
+                            A modern marketing website for Daob showcasing product value, dashboard, maps, interactive
+                            interface,
+                            reports, and payment solutions — optimized for clarity, hierarchy, and conversion.
+                        </p>
+
+                        <div class="metaRow">
+                            <span class="pill">Role: UI/UX + Frontend</span>
+                            <span class="pill">Deliverables: Website + UI sections</span>
+                            <span class="pill">Focus: Best sections + interactions</span>
+                        </div>
+
+                        <div class="actions">
+                            <a class="btn" href="#pages">View Screens</a>
+                            <a class="btn secondary" href="#interactive">Interactions</a>
+                        </div>
+
+                        <div class="miniStats">
+                            <div class="miniStat"><b>10+</b><span>Core Sections</span></div>
+                            <div class="miniStat"><b>3</b><span>Key Pages</span></div>
+                            <div class="miniStat"><b>100%</b><span>Responsive</span></div>
+                            <div class="miniStat"><b>Fast</b><span>Optimized</span></div>
+                            <div class="miniStat"><b>UI</b><span>Interactive</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Only ONE main image here (long homepage) -->
+                <section class="browser" aria-label="Homepage preview">
+                    <div class="browserTop">
+                        <div class="dots" aria-hidden="true"><span class="d"></span><span class="d"></span><span
+                                class="d"></span></div>
+                        <div class="url">https://daob.sa/</div>
+                    </div>
+                    <div class="browserBody">
+                        <div class="scrollframe" title="Scroll to preview the full page">
+                            <img src="assets/daob-home.png" alt="Daob.sa homepage long screenshot">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </header>
+
+    <!-- OVERVIEW (no extra images) -->
+    <section id="overview" class="section">
+        <div class="container">
+            <div class="sectionHead">
+                <h2>Overview</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="grid2">
+                <div class="card">
+                    <div class="pad">
+                        <div class="eyebrow"><span class="dot"></span> The goal</div>
+                        <p class="lead" style="max-width:none;">
+                            Present Daob clearly: what it is, how it works, and why it matters — using modern section
+                            rhythm,
+                            strong hierarchy, and trustworthy UI.
+                        </p>
+
+                        <ul class="klist">
+                            <li><b>Clear hero message</b> + conversion CTA</li>
+                            <li><b>Strong “Interactive Interface”</b> section</li>
+                            <li><b>Product proof</b>: dashboard, maps, reports</li>
+                            <li><b>Payment solutions</b> page with clean cards</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="pad">
+                        <div class="eyebrow"><span class="dot"></span> What I built</div>
+                        <p class="lead" style="max-width:none;">
+                            A clean, minimal structure that explains the system quickly, supported by interactions and a
+                            scalable UI
+                            pattern system for future sections.
+                        </p>
+                        <div style="height:12px"></div>
+                        <div class="metaRow">
+                            <span class="pill">Hierarchy-first layout</span>
+                            <span class="pill">Conversion-focused CTAs</span>
+                            <span class="pill">Reusable section patterns</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEY PAGES (tabs: one image viewer) -->
+    <section id="pages" class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="sectionHead">
+                <h2>Key Pages</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="tabs">
+                <div class="tabList" role="tablist" aria-label="Key pages list">
+                    <button class="tabBtn" role="tab" aria-selected="true" data-tab="home">
+                        Homepage
+                        <small>Hero + proof (dashboard/maps) + interactive UI + FAQ + partners + final CTA.</small>
+                    </button>
+                    <button class="tabBtn" role="tab" aria-selected="false" data-tab="reports">
+                        Reports
+                        <small>Clean KPIs, departmental breakdown tables, readable data hierarchy.</small>
+                    </button>
+                    <button class="tabBtn" role="tab" aria-selected="false" data-tab="payments">
+                        Payment Solutions
+                        <small>Card-based layout for payment methods + value benefits for restaurants.</small>
+                    </button>
+                </div>
+
+                <div class="viewer" aria-live="polite">
+                    <div class="viewerTop">
+                        <b id="viewerTitle">Homepage</b>
+                        <span id="viewerHint">Tip: keep only the strongest screenshots.</span>
+                    </div>
+                    <div class="viewerMedia">
+                        <img id="viewerImg" src="assets/daob-home.png" alt="Key page screenshot">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIONS (4 clips, compact) -->
+    <section id="interactive" class="section">
+        <div class="container">
+            <div class="sectionHead">
+                <h2>Interactive UI (GIF/MP4)</h2>
+                <div class="rule"></div>
+            </div>
+
+            <p class="lead">
+                Short clips showing hover states, scroll animations, interactive cards, or sliders. MP4 is usually
+                better than GIF.
+            </p>
+
+            <div class="clips">
+                <div class="clip">
+                    <div class="label">Clip 1 — hover / animation</div>
+                    <div class="stage">
+                        <video src="media/clip-1.mp4" autoplay muted loop playsinline></video>
+                        <!-- or: <img src="media/clip-1.gif" alt="Clip 1"> -->
+                    </div>
+                </div>
+
+                <div class="clip">
+                    <div class="label">Clip 2 — scroll interaction</div>
+                    <div class="stage">
+                        <video src="media/clip-2.mp4" autoplay muted loop playsinline></video>
+                    </div>
+                </div>
+
+                <div class="clip">
+                    <div class="label">Clip 3 — menu / UI</div>
+                    <div class="stage">
+                        <video src="media/clip-3.mp4" autoplay muted loop playsinline></video>
+                    </div>
+                </div>
+
+                <div class="clip">
+                    <div class="label">Clip 4 — micro interaction</div>
+                    <div class="stage">
+                        <video src="media/clip-4.mp4" autoplay muted loop playsinline></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERFACE (single best screenshot + embedded section) -->
+    <section id="interface" class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="sectionHead">
+                <h2>Interactive Interface (Embedded)</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="grid2">
+                <!-- Keep ONLY one screenshot (best crop) -->
+                <div class="card">
+                    <div class="pad">
+                        <div class="eyebrow"><span class="dot"></span> Best screenshot</div>
+                        <p class="lead" style="max-width:none; margin-bottom: 12px;">
+                            Use one strong crop of the “Interactive Interface” section (phone + bullets in one frame).
+                        </p>
+
+                        <div style="border-radius: 16px; overflow:hidden; box-shadow: var(--shadow2);">
+                            <img src="assets/daob-interface-best.png" alt="Interactive Interface best crop"
+                                style="width:100%;height:auto;display:block;">
+                        </div>
+
+                        <p class="lead" style="font-size: 13px; margin-top: 10px;">
+                            If you want even fewer images: remove this screenshot and keep only the embedded section.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Embed your real Daob phone section HTML here -->
+                <div class="embed">
+                    <div class="embedHeader">
+                        <b>Phone Section — imported as-is</b>
+                        <span>Paste your original section HTML inside</span>
+                    </div>
+                    <div class="embedBody">
+                        <div class="daob-embed">
+                            <!-- ===========================================
+                PASTE YOUR ORIGINAL "Interactive Interface" SECTION HERE
+                (same HTML from Daob landing page)
+
+                If you paste CSS for it, scope it like:
+                .daob-embed .your-class { ... }
+              =========================================== -->
+
+                            <!-- Minimal fallback placeholder (remove after embedding) -->
+                            <div class="card"
+                                style="background: color-mix(in oklab, var(--bg) 75%, transparent); box-shadow:none;">
+                                <div class="pad">
+                                    <div class="eyebrow"><span class="dot"></span> Embed placeholder</div>
+                                    <p class="lead" style="max-width:none;">
+                                        Replace this block with the real Daob “Interactive Interface” phone section.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RESULTS (clean, minimal) -->
+    <section id="results" class="section">
+        <div class="container">
+            <div class="sectionHead">
+                <h2>Results</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="results">
+                <div class="r"><b>+X%</b><span>CTA clicks / conversions</span></div>
+                <div class="r"><b>Fast</b><span>Optimized layout + assets</span></div>
+                <div class="r"><b>100%</b><span>Responsive section system</span></div>
+                <div class="r"><b>Clear</b><span>Hierarchy-first storytelling</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="sectionHead">
+                <h2>Contact</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="card">
+                <div class="pad contactCard">
+                    <div>
+                        <div class="eyebrow"><span class="dot"></span> Want something like this?</div>
+                        <p class="lead" style="max-width: 70ch;">
+                            I design and build modern websites with strong section rhythm, clean UI systems, and smooth
+                            interactions.
+                        </p>
+                    </div>
+                    <div class="actions">
+                        <a class="btn" href="mailto:you@email.com">Email Me</a>
+                        <a class="btn secondary" href="https://daob.sa/" target="_blank" rel="noreferrer">View Daob</a>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                © <span id="year"></span> Your Name. All rights reserved.
+            </footer>
+        </div>
+    </section>
+
+    <script>
+        // Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme
+        function toggleTheme() {
+            const html = document.documentElement;
+            const cur = html.getAttribute('data-theme') || 'light';
+            const next = cur === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        const saved = localStorage.getItem('theme') ||
+            (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', saved);
+
+        // Key pages tabs (one image viewer = fewer visible images)
+        const pages = {
+            home: { title: "Homepage", img: "assets/daob-home.png", alt: "Daob homepage screenshot" },
+            reports: { title: "Reports", img: "assets/daob-reports.png", alt: "Daob reports page screenshot" },
+            payments: { title: "Payment Solutions", img: "assets/daob-payments.png", alt: "Daob payments page screenshot" }
+        };
+
+        const viewerTitle = document.getElementById('viewerTitle');
+        const viewerImg = document.getElementById('viewerImg');
+
+        document.querySelectorAll('.tabBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tabBtn').forEach(b => b.setAttribute('aria-selected', 'false'));
+                btn.setAttribute('aria-selected', 'true');
+
+                const key = btn.getAttribute('data-tab');
+                const p = pages[key];
+                if (!p) return;
+
+                viewerTitle.textContent = p.title;
+                viewerImg.src = p.img;
+                viewerImg.alt = p.alt;
+            });
+        });
+    </script>
+</body>
+
+</html>

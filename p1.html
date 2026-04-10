@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce Flutter App | Project Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Include all the base styles from the main file */
+        /* For brevity, I'm including the essential project page specific styles */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --white: #ffffff;
+            --black: #0a0a0a;
+            --gray-50: #fafafa;
+            --gray-100: #f4f4f5;
+            --gray-200: #e4e4e7;
+            --gray-300: #d4d4d8;
+            --gray-400: #a1a1aa;
+            --gray-500: #71717a;
+            --gray-600: #52525b;
+            --gray-700: #3f3f46;
+            --gray-800: #27272a;
+            --gray-900: #18181b;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-dark: #4f46e5;
+            --accent-glow: rgba(99, 102, 241, 0.25);
+            --success: #10b981;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-flutter: linear-gradient(135deg, #02569B 0%, #13B9FD 100%);
+            --gradient-laravel: linear-gradient(135deg, #FF2D20 0%, #FF6B6B 100%);
+            --font: 'Inter', system-ui, sans-serif;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-2xl: 32px;
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--white);
+            --bg-secondary: var(--gray-50);
+            --bg-tertiary: var(--gray-100);
+            --bg-card: var(--white);
+            --text-primary: var(--gray-900);
+            --text-secondary: var(--gray-600);
+            --text-tertiary: var(--gray-400);
+            --border-color: var(--gray-200);
+            --nav-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #09090b;
+            --bg-secondary: #0f0f11;
+            --bg-tertiary: #18181b;
+            --bg-card: #18181b;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #71717a;
+            --border-color: #27272a;
+            --nav-bg: rgba(9, 9, 11, 0.8);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* PROJECT HERO */
+        .project-hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-flutter);
+            opacity: 0.08;
+        }
+
+        .project-hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-hero-text .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: color var(--transition);
+        }
+
+        .project-hero-text .back-link:hover {
+            color: var(--accent);
+        }
+
+        .project-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--success);
+            color: white;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-hero-desc {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .project-hero-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        .meta-value {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .project-hero-image {
+            position: relative;
+        }
+
+        .project-hero-mockup {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--gradient-flutter);
+            border-radius: var(--radius-2xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+
+        .mockup-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .mockup-placeholder i {
+            font-size: 5rem;
+            opacity: 0.6;
+        }
+
+        .mockup-placeholder span {
+            font-size: 1rem;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        /* PROJECT STATS BAR */
+        .project-stats-bar {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem;
+        }
+
+        .project-stats-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+        }
+
+        .project-stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: all var(--transition);
+        }
+
+        .project-stat-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .project-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 600;
+        }
+
+        /* CONTENT SECTIONS */
+        .content-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section-alt {
+            background: var(--bg-secondary);
+            max-width: none;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .content-section-alt .content-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-label i {
+            font-size: 0.9rem;
+        }
+
+        .content-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        .content-text p {
+            margin-bottom: 1.25rem;
+        }
+
+        .content-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* IMAGE + TEXT LAYOUTS */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .content-grid.reverse {
+            direction: rtl;
+        }
+
+        .content-grid.reverse>* {
+            direction: ltr;
+        }
+
+        .content-image {
+            position: relative;
+        }
+
+        .content-image-main {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+        }
+
+        .content-image-main:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .content-image-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            color: var(--text-tertiary);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .image-placeholder i {
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        .image-placeholder span {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .image-placeholder-gradient {
+            background: var(--gradient-flutter);
+            color: white;
+        }
+
+        .image-placeholder-gradient i,
+        .image-placeholder-gradient span {
+            opacity: 0.7;
+        }
+
+        /* FLOATING BADGE ON IMAGE */
+        .content-image-badge {
+            position: absolute;
+            bottom: -1rem;
+            right: -1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .content-image-badge-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .content-image-badge-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .content-image-badge-text strong {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* FEATURES LIST */
+        .features-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .features-list li i {
+            color: var(--success);
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .features-list li strong {
+            color: var(--text-primary);
+        }
+
+        /* TECH STACK GRID */
+        .tech-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all var(--transition);
+        }
+
+        .tech-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tech-card-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 1rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .tech-card-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .tech-card-desc {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+        }
+
+        /* SCREENSHOTS GALLERY */
+        .screenshots-section {
+            padding: 5rem 2rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .screenshots-header {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .screenshots-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .screenshots-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* MOBILE SCREENS GALLERY */
+        .mobile-screens-grid {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem 2rem 2rem;
+            scroll-snap-type: x mandatory;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .mobile-screens-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .mobile-screens-grid::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+
+        .mobile-screens-grid::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .mobile-screen-card {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .mobile-screen-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent);
+        }
+
+        .mobile-screen-img {
+            width: 100%;
+            aspect-ratio: 9/16;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .mobile-screen-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition);
+        }
+
+        .mobile-screen-card:hover .mobile-screen-img img {
+            transform: scale(1.05);
+        }
+
+        .mobile-screen-content {
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .mobile-screen-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .mobile-screen-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* DESKTOP SCREENSHOTS */
+        .desktop-screens-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding: 0 2rem;
+        }
+
+        .desktop-screen-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .desktop-screen-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .desktop-screen-card.full-width {
+            grid-column: span 2;
+        }
+
+        .desktop-screen-img {
+            width: 100%;
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--bg-tertiary);
+        }
+
+        .desktop-screen-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .desktop-screen-content {
+            padding: 1.5rem;
+        }
+
+        .desktop-screen-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .desktop-screen-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* BEFORE AFTER SECTION */
+        .before-after-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .before-after-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .ba-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .ba-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .ba-card.full-width {
+            grid-column: span 2;
+        }
+
+        .ba-slider {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            cursor: ew-resize;
+            background: var(--bg-tertiary);
+        }
+
+        .ba-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ba-before {
+            z-index: 2;
+            clip-path: inset(0 50% 0 0);
+        }
+
+        .ba-after {
+            z-index: 1;
+        }
+
+        .ba-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .ba-before .ba-inner {
+            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+        }
+
+        .ba-after .ba-inner {
+            background: var(--gradient-1);
+        }
+
+        .ba-inner i {
+            font-size: 3rem;
+            opacity: 0.5;
+        }
+
+        .ba-inner span {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+        }
+
+        .ba-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: white;
+            z-index: 10;
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .ba-handle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .ba-handle::after {
+            content: '⟷';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            z-index: 11;
+        }
+
+        .ba-label {
+            position: absolute;
+            bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 100px;
+            z-index: 5;
+        }
+
+        .ba-label-before {
+            left: 1rem;
+        }
+
+        .ba-label-after {
+            right: 1rem;
+        }
+
+        .ba-content {
+            padding: 1.5rem;
+        }
+
+        .ba-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .ba-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* FLOW DIAGRAM */
+        .flow-section {
+            padding: 5rem 2rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .flow-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .flow-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .flow-steps::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: var(--border-color);
+            z-index: 0;
+        }
+
+        .flow-step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .flow-step-number {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            border: 4px solid var(--bg-secondary);
+        }
+
+        .flow-step-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all var(--transition);
+        }
+
+        .flow-step:hover .flow-step-content {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .flow-step-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-step-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* CHALLENGES & SOLUTIONS */
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .challenge-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: all var(--transition);
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .challenge-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1.25rem;
+        }
+
+        .challenge-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .challenge-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* RESULTS METRICS */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .result-card {
+            background: var(--gradient-1);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            transition: all var(--transition);
+        }
+
+        .result-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* NEXT PROJECT CTA */
+        .next-project {
+            padding: 5rem 2rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .next-project-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .next-project-text h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .next-project-text p {
+            color: var(--text-secondary);
+        }
+
+        .next-project-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-logo-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--gradient-1);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle i {
+            position: absolute;
+            transition: all 0.5s;
+        }
+
+        [data-theme="dark"] .theme-toggle .fa-moon {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .theme-toggle .fa-sun {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        [data-theme="light"] .theme-toggle .fa-sun {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        [data-theme="light"] .theme-toggle .fa-moon {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .btn-primary {
+            padding: 0.875rem 1.75rem;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition);
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            padding: 0.875rem 1.75rem;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 2.5rem 2rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            text-align: center;
+        }
+
+        .footer-copy {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .project-hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .project-hero-image {
+                order: -1;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .content-grid.reverse {
+                direction: ltr;
+            }
+
+            .project-stats-inner {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .tech-stack-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .flow-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .flow-steps::before {
+                display: none;
+            }
+
+            .challenges-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .desktop-screens-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .desktop-screen-card.full-width {
+                grid-column: span 1;
+            }
+
+            .before-after-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ba-card.full-width {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-hero {
+                padding: 6rem 1.5rem 3rem;
+                min-height: auto;
+            }
+
+            .project-stats-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .tech-stack-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-screen-card {
+                flex: 0 0 240px;
+            }
+
+            .next-project-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .next-project-buttons {
+                width: 100%;
+            }
+
+            .next-project-buttons .btn-primary,
+            .next-project-buttons .btn-secondary {
+                flex: 1;
+                justify-content: center;
+            }
+
+            nav {
+                padding: 0.75rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <span class="nav-logo-icon">YN</span>
+            Your Name
+        </a>
+        <div class="nav-right">
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </button>
+            <a href="index.html#contact" class="btn-primary">
+                <i class="fas fa-paper-plane"></i>
+                Hire Me
+            </a>
+        </div>
+    </nav>
+
+    <!-- PROJECT HERO -->
+    <section class="project-hero">
+        <div class="project-hero-bg"></div>
+        <div class="project-hero-content">
+            <div class="project-hero-text">
+                <a href="index.html#projects" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Projects
+                </a>
+                <div class="project-hero-badge">
+                    <i class="fas fa-bolt"></i> Currently Building
+                </div>
+                <h1 class="project-hero-title">E-Commerce Mobile App with ZATCA Integration</h1>
+                <p class="project-hero-desc">
+                    A comprehensive full-stack e-commerce solution featuring a Flutter mobile application
+                    with Laravel backend, ZATCA e-invoicing compliance, multiple payment gateways, and
+                    real-time delivery tracking.
+                </p>
+                <div class="project-hero-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Role</span>
+                        <span class="meta-value">Full Stack Developer</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Timeline</span>
+                        <span class="meta-value">Nov 2025 - Present</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Platform</span>
+                        <span class="meta-value">iOS & Android</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Status</span>
+                        <span class="meta-value" style="color: var(--success);">● In Progress</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-hero-image">
+                <div class="project-hero-mockup">
+                    <div class="mockup-placeholder">
+                        <i class="fab fa-flutter"></i>
+                        <span>Add Hero Screenshot</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT STATS -->
+    <div class="project-stats-bar">
+        <div class="project-stats-inner">
+            <div class="project-stat-item">
+                <div class="project-stat-value">20+</div>
+                <div class="project-stat-label">App Screens</div>
+            </div>
+            <div class="project-stat-item">
+                <div class="project-stat-value">50+</div>
+                <div class="project-stat-label">API Endpoints</div>
+            </div>
+            <div class="project-stat-item">
+                <div class="project-stat-value">3</div>
+                <div class="project-stat-label">Payment Gateways</div>
+            </div>
+            <div class="project-stat-item">
+                <div class="project-stat-value">100%</div>
+                <div class="project-stat-label">ZATCA Compliant</div>
+            </div>
+            <div class="project-stat-item">
+                <div class="project-stat-value">2</div>
+                <div class="project-stat-label">Platforms</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OVERVIEW SECTION -->
+    <section class="content-section">
+        <div class="content-grid">
+            <div class="content-text-wrapper">
+                <span class="section-label"><i class="fas fa-info-circle"></i> Overview</span>
+                <h2 class="content-title">The Challenge</h2>
+                <div class="content-text">
+                    <p>
+                        The client needed a <strong>modern e-commerce platform</strong> that could serve customers
+                        across
+                        Saudi Arabia while maintaining full compliance with <strong>ZATCA e-invoicing
+                            regulations</strong>.
+                        The solution required seamless integration with multiple payment providers and real-time
+                        delivery tracking capabilities.
+                    </p>
+                    <p>
+                        The existing system was outdated, lacked mobile presence, and wasn't compliant with
+                        new Saudi tax regulations. Users were abandoning carts due to complicated checkout
+                        processes and limited payment options.
+                    </p>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> <strong>Mobile-first approach</strong> for the Saudi market
+                    </li>
+                    <li><i class="fas fa-check-circle"></i> <strong>ZATCA Phase 2</strong> e-invoicing compliance</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Buy Now, Pay Later</strong> integration with Tabby
+                    </li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Real-time tracking</strong> with Google Maps</li>
+                </ul>
+            </div>
+            <div class="content-image">
+                <div class="content-image-main">
+                    <div class="image-placeholder image-placeholder-gradient">
+                        <i class="fas fa-image"></i>
+                        <span>Project Overview Screenshot</span>
+                    </div>
+                </div>
+                <div class="content-image-badge">
+                    <div class="content-image-badge-icon" style="background: var(--success);">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="content-image-badge-text">
+                        <strong>Fully Compliant</strong>
+                        ZATCA Phase 2
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION SECTION - REVERSED -->
+    <section class="content-section content-section-alt">
+        <div class="content-inner">
+            <div class="content-grid reverse">
+                <div class="content-text-wrapper">
+                    <span class="section-label"><i class="fas fa-lightbulb"></i> Solution</span>
+                    <h2 class="content-title">The Approach</h2>
+                    <div class="content-text">
+                        <p>
+                            I architected a <strong>scalable full-stack solution</strong> using Flutter for
+                            cross-platform
+                            mobile development and Laravel for a robust backend API. The modular architecture
+                            ensures easy maintenance and future feature additions.
+                        </p>
+                        <p>
+                            Special attention was given to the <strong>checkout flow optimization</strong>, reducing
+                            steps
+                            from 7 to 3, and implementing one-tap payments for returning customers.
+                        </p>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> <strong>Clean Architecture</strong> with separation of
+                            concerns</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>State Management</strong> using
+                            Provider/Riverpod</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>RESTful APIs</strong> with Laravel Sanctum auth
+                        </li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Caching strategies</strong> for optimal
+                            performance</li>
+                    </ul>
+                </div>
+                <div class="content-image">
+                    <div class="content-image-main">
+                        <div class="image-placeholder image-placeholder-gradient"
+                            style="background: var(--gradient-laravel);">
+                            <i class="fas fa-code"></i>
+                            <span>Architecture Diagram</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH STACK SECTION -->
+    <section class="content-section">
+        <span class="section-label"><i class="fas fa-layer-group"></i> Technology Stack</span>
+        <h2 class="content-title">Built With Modern Technologies</h2>
+        <div class="content-text">
+            <p>
+                Carefully selected technologies to ensure scalability, performance, and maintainability.
+            </p>
+        </div>
+
+        <div class="tech-stack-grid">
+            <div class="tech-card">
+                <div class="tech-card-icon" style="background: var(--gradient-flutter);">
+                    <i class="fab fa-flutter"></i>
+                </div>
+                <div class="tech-card-name">Flutter</div>
+                <div class="tech-card-desc">Cross-platform mobile</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-icon" style="background: var(--gradient-laravel);">
+                    <i class="fab fa-laravel"></i>
+                </div>
+                <div class="tech-card-name">Laravel</div>
+                <div class="tech-card-desc">Backend API</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-icon" style="background: linear-gradient(135deg, #00758F 0%, #00A0D2 100%);">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="tech-card-name">MySQL</div>
+                <div class="tech-card-desc">Database</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-icon" style="background: linear-gradient(135deg, #FFCA28 0%, #FFA000 100%);">
+                    <i class="fab fa-firebase"></i>
+                </div>
+                <div class="tech-card-name">Firebase</div>
+                <div class="tech-card-desc">Auth & Notifications</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-icon" style="background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="tech-card-name">Google Maps</div>
+                <div class="tech-card-desc">Location Services</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-icon" style="background: linear-gradient(135deg, #1A365D 0%, #2A4365 100%);">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <div class="tech-card-name">MyFatoorah</div>
+                <div class="tech-card-desc">Payment Gateway</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-icon" style="background: linear-gradient(135deg, #000000 0%, #333333 100%);">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <div class="tech-card-name">Tabby</div>
+                <div class="tech-card-desc">Buy Now Pay Later</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-icon" style="background: linear-gradient(135deg, #046A38 0%, #0A8248 100%);">
+                    <i class="fas fa-file-invoice"></i>
+                </div>
+                <div class="tech-card-name">ZATCA</div>
+                <div class="tech-card-desc">E-Invoicing</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOBILE SCREENSHOTS -->
+    <section class="screenshots-section">
+        <div class="screenshots-header">
+            <span class="section-label"><i class="fas fa-mobile-alt"></i> Mobile App</span>
+            <h2 class="screenshots-title">App Screens & User Flows</h2>
+            <p class="screenshots-desc">Scroll through the mobile screens designed and developed for this project</p>
+        </div>
+
+        <div class="mobile-screens-grid">
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: var(--gradient-flutter);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-home"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">Home Screen</div>
+                    <div class="mobile-screen-desc">Featured products & categories</div>
+                </div>
+            </div>
+
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: var(--gradient-1);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-search"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">Search & Filter</div>
+                    <div class="mobile-screen-desc">Advanced product filtering</div>
+                </div>
+            </div>
+
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: var(--gradient-3);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-box"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">Product Details</div>
+                    <div class="mobile-screen-desc">Gallery, specs & reviews</div>
+                </div>
+            </div>
+
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: var(--gradient-5);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">Shopping Cart</div>
+                    <div class="mobile-screen-desc">Cart summary & coupons</div>
+                </div>
+            </div>
+
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: var(--gradient-4);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">Checkout</div>
+                    <div class="mobile-screen-desc">Payment method selection</div>
+                </div>
+            </div>
+
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: linear-gradient(135deg, #1A365D 0%, #2A4365 100%);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-wallet"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">MyFatoorah Payment</div>
+                    <div class="mobile-screen-desc">Secure payment processing</div>
+                </div>
+            </div>
+
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: linear-gradient(135deg, #000000 0%, #333333 100%);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-clock"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">Tabby BNPL</div>
+                    <div class="mobile-screen-desc">Buy Now, Pay Later flow</div>
+                </div>
+            </div>
+
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">Delivery Tracking</div>
+                    <div class="mobile-screen-desc">Real-time GPS tracking</div>
+                </div>
+            </div>
+
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: linear-gradient(135deg, #046A38 0%, #0A8248 100%);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">ZATCA Invoice</div>
+                    <div class="mobile-screen-desc">Compliant e-invoice</div>
+                </div>
+            </div>
+
+            <div class="mobile-screen-card">
+                <div class="mobile-screen-img" style="background: var(--gradient-2);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-user"></i>
+                        <span>Add Screenshot</span>
+                    </div>
+                </div>
+                <div class="mobile-screen-content">
+                    <div class="mobile-screen-title">User Profile</div>
+                    <div class="mobile-screen-desc">Account & order history</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BACKEND/ADMIN SCREENSHOTS -->
+    <section class="content-section">
+        <div class="screenshots-header" style="margin-bottom: 2rem;">
+            <span class="section-label"><i class="fas fa-desktop"></i> Admin Dashboard</span>
+            <h2 class="screenshots-title">Backend & Admin Panel</h2>
+            <p class="screenshots-desc">Laravel admin panel for managing products, orders, and analytics</p>
+        </div>
+
+        <div class="desktop-screens-grid" style="padding: 0;">
+            <div class="desktop-screen-card full-width">
+                <div class="desktop-screen-img" style="background: var(--gradient-laravel);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Admin Dashboard Overview</span>
+                    </div>
+                </div>
+                <div class="desktop-screen-content">
+                    <div class="desktop-screen-title">Dashboard Overview</div>
+                    <div class="desktop-screen-desc">Real-time sales analytics, order statistics, and key performance
+                        metrics at a glance.</div>
+                </div>
+            </div>
+
+            <div class="desktop-screen-card">
+                <div class="desktop-screen-img" style="background: var(--gradient-3);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-boxes"></i>
+                        <span>Product Management</span>
+                    </div>
+                </div>
+                <div class="desktop-screen-content">
+                    <div class="desktop-screen-title">Product Management</div>
+                    <div class="desktop-screen-desc">CRUD operations, inventory tracking, and bulk import.</div>
+                </div>
+            </div>
+
+            <div class="desktop-screen-card">
+                <div class="desktop-screen-img" style="background: var(--gradient-5);">
+                    <div class="image-placeholder" style="color: white; opacity: 0.7;">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Order Management</span>
+                    </div>
+                </div>
+                <div class="desktop-screen-content">
+                    <div class="desktop-screen-title">Order Management</div>
+                    <div class="desktop-screen-desc">Order processing, status updates, and invoice generation.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE AFTER SECTION -->
+    <section class="before-after-section">
+        <div class="before-after-header">
+            <span class="section-label"><i class="fas fa-magic"></i> UI Transformation</span>
+            <h2 class="content-title">Before & After</h2>
+            <p class="content-text">Drag the slider to see the UI/UX improvements made in this project</p>
+        </div>
+
+        <div class="before-after-grid">
+            <div class="ba-card full-width">
+                <div class="ba-slider" data-comparison>
+                    <div class="ba-img ba-before">
+                        <div class="ba-inner">
+                            <i class="fas fa-home"></i>
+                            <span>Add Before Screenshot</span>
+                        </div>
+                    </div>
+                    <div class="ba-img ba-after">
+                        <div class="ba-inner">
+                            <i class="fas fa-sparkles"></i>
+                            <span>Add After Screenshot</span>
+                        </div>
+                    </div>
+                    <span class="ba-label ba-label-before">Before</span>
+                    <span class="ba-label ba-label-after">After</span>
+                    <div class="ba-handle"></div>
+                </div>
+                <div class="ba-content">
+                    <div class="ba-title">Home Screen Redesign</div>
+                    <div class="ba-desc">Transformed cluttered layout into clean, product-focused design with improved
+                        visual hierarchy and intuitive navigation.</div>
+                </div>
+            </div>
+
+            <div class="ba-card">
+                <div class="ba-slider" data-comparison>
+                    <div class="ba-img ba-before">
+                        <div class="ba-inner">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Before</span>
+                        </div>
+                    </div>
+                    <div class="ba-img ba-after" style="background: var(--gradient-4);">
+                        <div class="ba-inner" style="background: var(--gradient-4);">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>After</span>
+                        </div>
+                    </div>
+                    <span class="ba-label ba-label-before">Before</span>
+                    <span class="ba-label ba-label-after">After</span>
+                    <div class="ba-handle"></div>
+                </div>
+                <div class="ba-content">
+                    <div class="ba-title">Checkout Flow</div>
+                    <div class="ba-desc">Streamlined from 7 steps to 3, reducing cart abandonment.</div>
+                </div>
+            </div>
+
+            <div class="ba-card">
+                <div class="ba-slider" data-comparison>
+                    <div class="ba-img ba-before">
+                        <div class="ba-inner">
+                            <i class="fas fa-box"></i>
+                            <span>Before</span>
+                        </div>
+                    </div>
+                    <div class="ba-img ba-after" style="background: var(--gradient-3);">
+                        <div class="ba-inner" style="background: var(--gradient-3);">
+                            <i class="fas fa-box"></i>
+                            <span>After</span>
+                        </div>
+                    </div>
+                    <span class="ba-label ba-label-before">Before</span>
+                    <span class="ba-label ba-label-after">After</span>
+                    <div class="ba-handle"></div>
+                </div>
+                <div class="ba-content">
+                    <div class="ba-title">Product Details</div>
+                    <div class="ba-desc">Enhanced gallery, clearer pricing, and prominent CTAs.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USER FLOW SECTION -->
+    <section class="flow-section">
+        <div class="flow-inner">
+            <div class="flow-header">
+                <span class="section-label"><i class="fas fa-route"></i> User Flow</span>
+                <h2 class="content-title">Checkout Journey</h2>
+                <p class="content-text">Optimized user flow from product discovery to successful purchase</p>
+            </div>
+
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="flow-step-number">1</div>
+                    <div class="flow-step-content">
+                        <div class="flow-step-title">Browse Products</div>
+                        <div class="flow-step-desc">Search, filter, and discover products with intuitive navigation
+                        </div>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-step-number">2</div>
+                    <div class="flow-step-content">
+                        <div class="flow-step-title">Add to Cart</div>
+                        <div class="flow-step-desc">One-tap add to cart with quantity selection and variants</div>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-step-number">3</div>
+                    <div class="flow-step-content">
+                        <div class="flow-step-title">Checkout</div>
+                        <div class="flow-step-desc">Address selection, payment method, and order review</div>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-step-number">4</div>
+                    <div class="flow-step-content">
+                        <div class="flow-step-title">Track Delivery</div>
+                        <div class="flow-step-desc">Real-time GPS tracking and push notifications</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHALLENGES & SOLUTIONS -->
+    <section class="content-section">
+        <span class="section-label"><i class="fas fa-puzzle-piece"></i> Problem Solving</span>
+        <h2 class="content-title">Challenges & Solutions</h2>
+
+        <div class="challenges-grid">
+            <div class="challenge-card">
+                <div class="challenge-icon" style="background: linear-gradient(135deg, #046A38 0%, #0A8248 100%);">
+                    <i class="fas fa-file-invoice"></i>
+                </div>
+                <div class="challenge-title">ZATCA Compliance</div>
+                <div class="challenge-text">
+                    <strong>Challenge:</strong> Implementing complex ZATCA Phase 2 e-invoicing requirements with QR
+                    codes and digital signatures.<br><br>
+                    <strong>Solution:</strong> Built a dedicated ZATCA service module with automatic XML generation, QR
+                    code embedding, and real-time validation against ZATCA servers.
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-icon" style="background: var(--gradient-5);">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <div class="challenge-title">Multiple Payment Gateways</div>
+                <div class="challenge-text">
+                    <strong>Challenge:</strong> Integrating three different payment providers with varying APIs and
+                    response formats.<br><br>
+                    <strong>Solution:</strong> Created a unified payment abstraction layer allowing seamless switching
+                    between gateways while maintaining consistent user experience.
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-icon" style="background: var(--gradient-3);">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="challenge-title">Real-time Sync</div>
+                <div class="challenge-text">
+                    <strong>Challenge:</strong> Keeping inventory and order status synchronized across mobile app and
+                    admin panel.<br><br>
+                    <strong>Solution:</strong> Implemented WebSocket connections with Firebase for real-time updates and
+                    offline-first architecture with local caching.
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-icon" style="background: var(--gradient-1);">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <div class="challenge-title">Performance Optimization</div>
+                <div class="challenge-text">
+                    <strong>Challenge:</strong> App was initially slow with large product catalogs and images.<br><br>
+                    <strong>Solution:</strong> Implemented lazy loading, image compression, pagination, and Redis
+                    caching on the API side achieving 40% faster load times.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="content-section content-section-alt">
+        <div class="content-inner">
+            <div class="screenshots-header">
+                <span class="section-label"><i class="fas fa-chart-line"></i> Impact</span>
+                <h2 class="screenshots-title">Results & Metrics</h2>
+                <p class="screenshots-desc">Measurable improvements achieved through this project</p>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-value">45%</div>
+                    <div class="result-label">Increase in User Engagement</div>
+                </div>
+                <div class="result-card" style="background: var(--gradient-4);">
+                    <div class="result-value">60%</div>
+                    <div class="result-label">Faster Checkout Process</div>
+                </div>
+                <div class="result-card" style="background: var(--gradient-3);">
+                    <div class="result-value">100%</div>
+                    <div class="result-label">ZATCA Compliance</div>
+                </div>
+                <div class="result-card" style="background: var(--gradient-5);">
+                    <div class="result-value">40%</div>
+                    <div class="result-label">Improved Load Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEXT PROJECT -->
+    <section class="next-project">
+        <div class="next-project-inner">
+            <div class="next-project-text">
+                <h3>Like what you see?</h3>
+                <p>Let's discuss how I can help with your project.</p>
+            </div>
+            <div class="next-project-buttons">
+                <a href="index.html#contact" class="btn-primary">
+                    <i class="fas fa-paper-plane"></i> Get in Touch
+                </a>
+                <a href="project-academy.html" class="btn-secondary">
+                    Next Project <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-copy">
+            © 2025 Your Name. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // Comparison Sliders
+        document.querySelectorAll('[data-comparison]').forEach(slider => {
+            const handle = slider.querySelector('.ba-handle');
+            const before = slider.querySelector('.ba-before');
+            let isDragging = false;
+
+            function updatePosition(x) {
+                const rect = slider.getBoundingClientRect();
+                let pct = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+                handle.style.left = pct + '%';
+                before.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+            }
+
+            slider.addEventListener('mousedown', e => { isDragging = true; updatePosition(e.clientX); });
+            slider.addEventListener('touchstart', e => { isDragging = true; updatePosition(e.touches[0].clientX); }, { passive: true });
+            document.addEventListener('mousemove', e => { if (isDragging) updatePosition(e.clientX); });
+            document.addEventListener('touchmove', e => { if (isDragging) updatePosition(e.touches[0].clientX); }, { passive: true });
+            document.addEventListener('mouseup', () => isDragging = false);
+            document.addEventListener('touchend', () => isDragging = false);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

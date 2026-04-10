@@ -1,0 +1,185 @@
+<head>
+    <style>
+        /* THEME TOGGLE */
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--gray-200);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: background var(--transition);
+            border: 1px solid var(--gray-200);
+        }
+
+        .theme-toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: var(--black);
+            border-radius: 50%;
+            transition: transform var(--transition), background var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        [data-theme="dark"] .theme-toggle-slider {
+            transform: translateX(30px);
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 3rem;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 100;
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        .nav-logo img {
+            width: 100px;
+            transition: filter 0.3s ease;
+        }
+
+        /* Dark mode → make logo pure white */
+        body[data-theme="dark"] .nav-logo img {
+            filter: brightness(0) invert(1);
+        }
+
+        /* Light mode → invert colors */
+        body[data-theme="light"] .nav-logo img {
+            filter: invert(1) brightness(1.2);
+        }
+
+        [data-theme="dark"] nav {
+            background: rgba(17, 17, 17, 0.92);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            letter-spacing: 0.01em;
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--black);
+        }
+
+        /* Mobile Menu Button */
+        .nav-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .nav-mobile-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--black);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-mobile-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--white);
+                border-bottom: 1px solid var(--gray-200);
+                padding: 1rem 1.5rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            [data-theme="dark"] .nav-links {
+                background: var(--white);
+            }
+
+            .nav-left {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="/" class="nav-logo">
+                <img src="/assets/logo.png" alt="Your Logo">
+            </a>
+            <div class="nav-mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/#experience">Experience</a></li>
+                <li><a href="/#projects">Projects</a></li>
+                <li><a href="/#skills">Skills</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <div class="theme-toggle-slider">🌙</div>
+        </div>
+    </nav>
+
+
+</body>

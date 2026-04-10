@@ -1,0 +1,1542 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Daob.sa — Website Case Study</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================
+       YOUR THEME (from your CSS)
+       ========================= */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --white: #ffffff;
+            --black: #111111;
+            --gray-100: #f5f5f3;
+            --gray-200: #e8e8e5;
+            --gray-400: #a0a09a;
+            --gray-600: #6b6b66;
+            --accent: #1a1a1a;
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+            --transition: 0.3s ease;
+
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-6: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+
+            /* extra tokens (same style) */
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --shadow: 0 20px 55px rgba(0, 0, 0, .10);
+
+            /* brand accent for this case study (Daob green vibe) */
+            --brand: #2aa85f;
+            --brand-soft: rgba(42, 168, 95, .14);
+        }
+
+        [data-theme="dark"] {
+            --white: #111111;
+            --black: #ffffff;
+            --gray-100: #1a1a1a;
+            --gray-200: #2a2a2a;
+            --gray-400: #808080;
+            --gray-600: #b0b0b0;
+            --accent: #ffffff;
+
+            --shadow: 0 24px 60px rgba(0, 0, 0, .55);
+            --brand-soft: rgba(42, 168, 95, .18);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        /* subtle background glow */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(900px 420px at 14% 14%, rgba(67, 233, 123, .12), transparent 60%),
+                radial-gradient(820px 520px at 88% 10%, rgba(79, 172, 254, .10), transparent 60%),
+                radial-gradient(900px 620px at 55% 88%, rgba(240, 147, 251, .07), transparent 60%);
+            opacity: .95;
+        }
+
+        [data-theme="dark"] body::before {
+            opacity: .55;
+        }
+
+        /* =========================
+       Top Nav
+       ========================= */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 0.85rem 1.25rem;
+            background: color-mix(in oklab, var(--white) 88%, transparent);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 1000;
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 220px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 800;
+            letter-spacing: -.02em;
+            white-space: nowrap;
+        }
+
+        .nav-logo-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--gradient-4);
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-weight: 900;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+        }
+
+        .nav-sub {
+            font-size: 12px;
+            color: var(--gray-600);
+            font-weight: 500;
+            margin-left: 4px;
+            display: block;
+        }
+
+        .nav-mid {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0 10px;
+        }
+
+        .nav-mid a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-size: 13px;
+            transition: color var(--transition);
+            white-space: nowrap;
+        }
+
+        .nav-mid a:hover {
+            color: var(--black);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            background: var(--gray-100);
+            color: var(--gray-600);
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: background var(--transition), border-color var(--transition), transform .2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-1px);
+        }
+
+        .theme-toggle i {
+            position: absolute;
+            transition: all .45s ease;
+        }
+
+        [data-theme="light"] .theme-toggle .fa-sun {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        [data-theme="light"] .theme-toggle .fa-moon {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        [data-theme="dark"] .theme-toggle .fa-sun {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        [data-theme="dark"] .theme-toggle .fa-moon {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.85rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid var(--gray-200);
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: transform .2s ease, opacity var(--transition);
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: .92;
+        }
+
+        .btn.secondary {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        @media (max-width: 980px) {
+            .nav-mid {
+                display: none;
+            }
+
+            .nav-sub {
+                display: none;
+            }
+        }
+
+        /* =========================
+       Layout + Sections
+       ========================= */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            padding: 5.5rem 0;
+        }
+
+        /* Hero */
+        .hero {
+            padding-top: 6.8rem;
+            padding-bottom: 3.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: 22px;
+            align-items: center;
+        }
+
+        @media (max-width: 980px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        .pad {
+            padding: 18px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .eyebrow .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 99px;
+            background: var(--brand);
+            box-shadow: 0 0 0 8px var(--brand-soft);
+        }
+
+        .h1 {
+            font-size: clamp(2.1rem, 4vw, 3.4rem);
+            font-weight: 300;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .h1 em {
+            font-style: normal;
+            font-weight: 800;
+            background: var(--gradient-4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .lead {
+            font-size: 1rem;
+            color: var(--gray-600);
+            line-height: 1.85;
+            max-width: 75ch;
+        }
+
+        .meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .meta .item {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 14px;
+            padding: 10px 12px;
+            min-width: 180px;
+        }
+
+        .meta .label {
+            font-size: 11px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            font-weight: 800;
+        }
+
+        .meta .value {
+            margin-top: 6px;
+            font-weight: 800;
+            letter-spacing: -.01em;
+        }
+
+        /* Browser mock */
+        .browser {
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .browser-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-100);
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .d {
+            width: 10px;
+            height: 10px;
+            border-radius: 99px;
+            background: var(--gray-200);
+        }
+
+        .url {
+            margin-left: 8px;
+            font-size: 12px;
+            color: var(--gray-600);
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 6px 10px;
+            border-radius: 999px;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .browser-body {
+            padding: 12px;
+        }
+
+        /* Media components */
+        figure {
+            margin: 0;
+        }
+
+        .shot {
+            border-radius: 14px;
+            border: 1px solid var(--gray-200);
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .shot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .zoomable {
+            cursor: zoom-in;
+        }
+
+        /* For huge long screenshots (homepage) */
+        .scrollframe {
+            max-height: 520px;
+            overflow: auto;
+            border-radius: 14px;
+            border: 1px solid var(--gray-200);
+            background: var(--white);
+        }
+
+        .scrollframe img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            background: var(--gray-100);
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 18px 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 980px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            text-align: center;
+            transition: transform .2s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat b {
+            display: block;
+            font-size: 26px;
+            letter-spacing: -.03em;
+            color: var(--black);
+            line-height: 1.1;
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            font-weight: 800;
+        }
+
+        /* Section header */
+        .section-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .section-head h2 {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -.01em;
+        }
+
+        .rule {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(42, 168, 95, .75), var(--gray-200));
+            border-radius: 999px;
+            margin-bottom: 6px;
+            opacity: .95;
+        }
+
+        /* Content grid (text + image) */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            align-items: center;
+        }
+
+        @media (max-width: 980px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .klist {
+            list-style: none;
+            margin-top: 14px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .klist li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            color: var(--gray-600);
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 10px 12px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 14px;
+        }
+
+        .klist i {
+            color: var(--brand);
+            margin-top: 2px;
+        }
+
+        /* Key pages grid */
+        .pages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        @media (max-width: 980px) {
+            .pages {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .page-card {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: transform .2s ease;
+        }
+
+        .page-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .page-body {
+            padding: 14px;
+        }
+
+        .page-title {
+            font-weight: 900;
+            letter-spacing: -.01em;
+        }
+
+        .page-desc {
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.65;
+        }
+
+        /* Best sections gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 14px;
+        }
+
+        .g {
+            grid-column: span 4;
+        }
+
+        .g.wide {
+            grid-column: span 8;
+        }
+
+        .g.tall img {
+            height: 520px;
+            object-fit: cover;
+        }
+
+        /* if you use crops */
+        @media (max-width: 980px) {
+            .gallery {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            .g,
+            .g.wide {
+                grid-column: span 6;
+            }
+        }
+
+        /* Interactive clips (GIF/MP4) */
+        .clips {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .clips {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ph {
+            border-radius: 14px;
+            border: 1px dashed color-mix(in oklab, var(--gray-400) 55%, var(--gray-200));
+            background: linear-gradient(180deg, color-mix(in oklab, var(--white) 92%, transparent), var(--gray-100));
+            padding: 16px;
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--gray-600);
+        }
+
+        .ph strong {
+            color: var(--black);
+        }
+
+        /* Mobile screens slider */
+        .mobile-row {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            padding: 6px 2px 14px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .mobile-row::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .mobile-row::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 99px;
+        }
+
+        .mobile-row::-webkit-scrollbar-thumb {
+            background: color-mix(in oklab, var(--brand) 65%, var(--gray-400));
+            border-radius: 99px;
+        }
+
+        .mcard {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: 22px;
+            overflow: hidden;
+            transition: transform .2s ease;
+        }
+
+        .mcard:hover {
+            transform: translateY(-6px);
+        }
+
+        .mimg {
+            aspect-ratio: 9/16;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .mimg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mcontent {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .mcontent b {
+            display: block;
+            font-weight: 900;
+        }
+
+        .mcontent span {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        /* Before/After slider */
+        .ba {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .ba-stage {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            cursor: ew-resize;
+            background: var(--white);
+        }
+
+        .ba-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ba-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .ba-before {
+            z-index: 2;
+            clip-path: inset(0 50% 0 0);
+        }
+
+        .ba-after {
+            z-index: 1;
+        }
+
+        .ba-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #fff;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(0, 0, 0, .25);
+        }
+
+        .ba-handle::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 46px;
+            height: 46px;
+            border-radius: 999px;
+            background: #fff;
+            box-shadow: 0 10px 22px rgba(0, 0, 0, .18);
+        }
+
+        .ba-handle::after {
+            content: "⟷";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            font-weight: 900;
+            color: #333;
+        }
+
+        .ba-meta {
+            padding: 14px 16px;
+            border-top: 1px solid var(--gray-200);
+            background: var(--gray-100);
+        }
+
+        .ba-meta b {
+            display: block;
+            font-weight: 900;
+        }
+
+        .ba-meta span {
+            display: block;
+            margin-top: 6px;
+            color: var(--gray-600);
+            font-size: 13px;
+        }
+
+        /* Results */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        @media (max-width: 980px) {
+            .results {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .results {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .r {
+            border-radius: 18px;
+            padding: 18px;
+            color: #fff;
+            background: var(--gradient-4);
+            transition: transform .2s ease;
+        }
+
+        .r:hover {
+            transform: translateY(-6px);
+        }
+
+        .r b {
+            font-size: 34px;
+            letter-spacing: -.03em;
+            display: block;
+            line-height: 1.1;
+        }
+
+        .r span {
+            opacity: .9;
+            font-size: 13px;
+            display: block;
+            margin-top: 8px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2.5rem 0 4rem;
+            border-top: 1px solid var(--gray-200);
+            color: var(--gray-600);
+            font-size: 12px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            z-index: 2000;
+        }
+
+        .lightbox.open {
+            display: flex;
+        }
+
+        .lb-inner {
+            width: 100%;
+            max-width: 1100px;
+            border-radius: 18px;
+            overflow: hidden;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 50px 120px rgba(0, 0, 0, .55);
+        }
+
+        .lb-top {
+            padding: 10px 12px;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .lb-top b {
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .lb-close {
+            border: 1px solid var(--gray-200);
+            background: var(--white);
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-weight: 900;
+            cursor: pointer;
+            color: var(--black);
+        }
+
+        .lb-media img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: var(--gray-100);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAV -->
+    <nav>
+        <div class="nav-left">
+            <a class="nav-logo" href="#" onclick="return false;">
+                <span class="nav-logo-badge">YN</span>
+                <span>
+                    Daob.sa — Case Study
+                    <span class="nav-sub">Website • UI/UX • Frontend build</span>
+                </span>
+            </a>
+        </div>
+
+        <div class="nav-mid" aria-label="Page sections">
+            <a href="#overview">Overview</a>
+            <a href="#pages">Key Pages</a>
+            <a href="#sections">Best Sections</a>
+            <a href="#interactive">Interactive UI</a>
+            <a href="#mobile">Mobile</a>
+            <a href="#beforeafter">Before/After</a>
+            <a href="#results">Results</a>
+        </div>
+
+        <div class="nav-right">
+            <button class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Toggle theme">
+                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <a class="btn secondary" href="https://daob.sa/" target="_blank" rel="noreferrer">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Site
+            </a>
+            <a class="btn" href="#contact">
+                <i class="fa-solid fa-paper-plane"></i> Hire Me
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <section class="card">
+                    <div class="pad">
+                        <div class="eyebrow"><span class="dot"></span> Project spotlight</div>
+                        <h1 class="h1">Complete digital transformation for a <em>healthy restaurant</em> platform.</h1>
+                        <p class="lead">
+                            A modern marketing website for Daob showcasing product value, dashboard, maps, interactive
+                            interface,
+                            reports, and payment solutions — optimized for clarity, hierarchy, and conversion.
+                        </p>
+
+                        <div class="meta" style="margin-top:16px;">
+                            <div class="item">
+                                <div class="label">Role</div>
+                                <div class="value">UI/UX + Frontend</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Deliverables</div>
+                                <div class="value">Website + UI sections</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Focus</div>
+                                <div class="value">Best sections + interactions</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+                            <a class="btn" href="#pages"><i class="fa-solid fa-images"></i> View Screens</a>
+                            <a class="btn secondary" href="#interactive"><i class="fa-solid fa-bolt"></i>
+                                Interactions</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right: Browser mock with your long homepage screenshot -->
+                <section class="browser">
+                    <div class="browser-top">
+                        <div class="dots" aria-hidden="true">
+                            <span class="d"></span><span class="d"></span><span class="d"></span>
+                        </div>
+                        <div class="url">https://daob.sa/</div>
+                    </div>
+                    <div class="browser-body">
+                        <!-- BEST for long page screenshot -->
+                        <div class="scrollframe shot zoomable" data-lightbox
+                            data-title="Daob.sa — Homepage (Long Screenshot)" data-full="assets/daob-home.png">
+                            <img src="assets/daob-home.png" alt="Daob.sa homepage long screenshot">
+                        </div>
+
+                        <!-- If you want a normal image instead of scrollframe:
+            <figure class="shot zoomable" data-lightbox data-title="Homepage" data-full="assets/daob-home.png">
+              <img src="assets/daob-home.png" alt="Daob.sa homepage">
+            </figure>
+            -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </header>
+
+    <!-- STATS BAR -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats">
+                <div class="stat"><b>10+</b><span>Core Sections</span></div>
+                <div class="stat"><b>3</b><span>Key Pages</span></div>
+                <div class="stat"><b>100%</b><span>Responsive</span></div>
+                <div class="stat"><b>Fast</b><span>Optimized</span></div>
+                <div class="stat"><b>UI</b><span>Interactive</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section id="overview" class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>Overview</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <div class="pad">
+                        <div class="eyebrow"><span class="dot"></span> The goal</div>
+                        <p class="lead" style="max-width:none;">
+                            Present Daob clearly: what it is, how it works, and why it matters — using modern section
+                            rhythm,
+                            strong hierarchy, and trustworthy UI.
+                        </p>
+
+                        <ul class="klist">
+                            <li><i class="fa-solid fa-check-circle"></i> Clear hero message + conversion CTA</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Strong “Interactive Interface” section</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Product proof: dashboard, maps, reports</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Payment solutions page with clean cards</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="pad">
+                        <div class="eyebrow"><span class="dot"></span> What I built</div>
+
+                        <!-- Replace with any close-up hero / key section crop -->
+                        <figure class="shot zoomable" data-lightbox data-title="Homepage — Key section crop"
+                            data-full="assets/daob-home.png">
+                            <img src="assets/daob-home.png"
+                                alt="Daob.sa homepage key section crop (replace with cropped image if you want)">
+                        </figure>
+
+                        <p class="lead" style="margin-top:12px; font-size: 13px;">
+                            Tip: for better portfolio, add **cropped screenshots** of each section (Hero, Dashboard,
+                            Maps, Interface, FAQ).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEY PAGES (YOUR REAL IMAGES) -->
+    <section id="pages" class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-head">
+                <h2>Key Pages</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="pages">
+                <article class="page-card">
+                    <figure class="shot zoomable" data-lightbox data-title="Homepage" data-full="assets/daob-home.png">
+                        <img src="assets/daob-home.png" alt="Daob.sa homepage screenshot">
+                    </figure>
+                    <div class="page-body">
+                        <div class="page-title">Homepage</div>
+                        <div class="page-desc">
+                            Strong hero, proof sections (dashboard/maps), interactive UI preview, FAQ, partners, and
+                            final CTA.
+                        </div>
+                    </div>
+                </article>
+
+                <article class="page-card">
+                    <figure class="shot zoomable" data-lightbox data-title="Reports Page"
+                        data-full="assets/daob-reports.png">
+                        <img src="assets/daob-reports.png" alt="Daob.sa reports page screenshot">
+                    </figure>
+                    <div class="page-body">
+                        <div class="page-title">Reports</div>
+                        <div class="page-desc">
+                            Clean KPI layout, departmental breakdown tables, and readable data hierarchy.
+                        </div>
+                    </div>
+                </article>
+
+                <article class="page-card">
+                    <figure class="shot zoomable" data-lightbox data-title="Payment Solutions Page"
+                        data-full="assets/daob-payments.png">
+                        <img src="assets/daob-payments.png" alt="Daob.sa payment solutions page screenshot">
+                    </figure>
+                    <div class="page-body">
+                        <div class="page-title">Payment Solutions</div>
+                        <div class="page-desc">
+                            Card-based layout highlighting payment methods and value benefits for restaurants.
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEST SECTIONS (ADD MANY IMAGES HERE) -->
+    <section id="sections" class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>Best Sections (Add as many screenshots as you want)</h2>
+                <div class="rule"></div>
+            </div>
+
+            <p class="lead" style="margin-bottom: 14px;">
+                Replace each placeholder with a cropped screenshot of a great section (Hero, Dashboard, Maps,
+                Interactive Interface, How it works, Features grid, FAQ, Partners, Footer CTA).
+            </p>
+
+            <div class="gallery">
+                <!-- Wide highlight -->
+                <div class="g wide">
+                    <div class="ph">
+                        <div>
+                            <strong>Wide Section Screenshot</strong><br>
+                            Hero section / Big proof section (crop)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="g">
+                    <div class="ph"><strong>Section Screenshot</strong><br>Dashboard preview</div>
+                </div>
+
+                <div class="g">
+                    <div class="ph"><strong>Section Screenshot</strong><br>Geographical maps</div>
+                </div>
+
+                <div class="g">
+                    <div class="ph"><strong>Section Screenshot</strong><br>Interactive Interface block</div>
+                </div>
+
+                <div class="g wide">
+                    <div class="ph">
+                        <div>
+                            <strong>Wide Section Screenshot</strong><br>
+                            “How does system work?” steps / process
+                        </div>
+                    </div>
+                </div>
+
+                <div class="g">
+                    <div class="ph"><strong>Section Screenshot</strong><br>Features grid</div>
+                </div>
+
+                <div class="g">
+                    <div class="ph"><strong>Section Screenshot</strong><br>FAQ</div>
+                </div>
+
+                <div class="g wide">
+                    <div class="ph">
+                        <div>
+                            <strong>Wide Section Screenshot</strong><br>
+                            Final CTA / partners row
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE UI -->
+    <section id="interactive" class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-head">
+                <h2>Interactive Interface (GIF/MP4)</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <div class="pad">
+                        <div class="eyebrow"><span class="dot"></span> Interaction demos</div>
+                        <p class="lead" style="max-width:none;">
+                            Put short clips showing hover states, scroll animations, interactive cards, or sliders.
+                            GIF works great for portfolios.
+                        </p>
+
+                        <div style="height: 12px;"></div>
+
+                        <div class="clips">
+                            <!-- Replace these placeholders with <video> or <img> (GIF) -->
+                            <div class="ph">
+                                <div><strong>Clip 1</strong><br>(hover / animation)</div>
+                            </div>
+                            <div class="ph">
+                                <div><strong>Clip 2</strong><br>(scroll interaction)</div>
+                            </div>
+                            <div class="ph">
+                                <div><strong>Clip 3</strong><br>(menu / UI)</div>
+                            </div>
+                            <div class="ph">
+                                <div><strong>Clip 4</strong><br>(micro interaction)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="pad">
+                        <div class="eyebrow"><span class="dot"></span> Best “Interactive Interface” screenshot</div>
+
+                        <!-- Replace with a crop from your interactive section -->
+                        <div class="ph" style="min-height: 420px;">
+                            <div>
+                                <strong>Interactive Interface Screenshot</strong><br>
+                                (crop from homepage)
+                            </div>
+                        </div>
+
+                        <p class="lead" style="margin-top:12px; font-size:13px;">
+                            Tip: add 2 crops here: (1) the phone mockup area, (2) the feature bullets around it.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOBILE -->
+    <section id="mobile" class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>Mobile Screens (Slider)</h2>
+                <div class="rule"></div>
+            </div>
+
+            <p class="lead" style="margin-bottom: 12px;">
+                Add mobile screenshots (9:16). You can include: Home, Features, Reports, Payments, Contact, etc.
+            </p>
+
+            <div class="mobile-row">
+                <!-- Duplicate as many .mcard as you want -->
+                <article class="mcard">
+                    <div class="mimg">
+                        <!-- <img src="assets/mobile-01.png" alt="Mobile home"> -->
+                        <div class="ph" style="min-height:100%; border:0; border-radius:0;">
+                            <div><strong>Mobile 01</strong><br>Home</div>
+                        </div>
+                    </div>
+                    <div class="mcontent"><b>Home</b><span>Hero + CTA</span></div>
+                </article>
+
+                <article class="mcard">
+                    <div class="mimg">
+                        <div class="ph" style="min-height:100%; border:0; border-radius:0;">
+                            <div><strong>Mobile 02</strong><br>Dashboard</div>
+                        </div>
+                    </div>
+                    <div class="mcontent"><b>Dashboard</b><span>Proof section</span></div>
+                </article>
+
+                <article class="mcard">
+                    <div class="mimg">
+                        <div class="ph" style="min-height:100%; border:0; border-radius:0;">
+                            <div><strong>Mobile 03</strong><br>Interactive UI</div>
+                        </div>
+                    </div>
+                    <div class="mcontent"><b>Interface</b><span>Interactive section</span></div>
+                </article>
+
+                <article class="mcard">
+                    <div class="mimg">
+                        <div class="ph" style="min-height:100%; border:0; border-radius:0;">
+                            <div><strong>Mobile 04</strong><br>Reports</div>
+                        </div>
+                    </div>
+                    <div class="mcontent"><b>Reports</b><span>KPI layout</span></div>
+                </article>
+
+                <article class="mcard">
+                    <div class="mimg">
+                        <div class="ph" style="min-height:100%; border:0; border-radius:0;">
+                            <div><strong>Mobile 05</strong><br>Payments</div>
+                        </div>
+                    </div>
+                    <div class="mcontent"><b>Payments</b><span>Methods cards</span></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE / AFTER -->
+    <section id="beforeafter" class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-head">
+                <h2>Before & After (optional)</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="ba">
+                <div class="ba-stage" data-comparison>
+                    <!-- Replace with real images:
+               BEFORE: <img src="assets/before.png">
+               AFTER:  <img src="assets/after.png">
+          -->
+                    <div class="ba-img ba-after">
+                        <div class="ph" style="min-height:100%; border:0; border-radius:0;">
+                            <div><strong>AFTER</strong><br>Final UI screenshot</div>
+                        </div>
+                    </div>
+
+                    <div class="ba-img ba-before">
+                        <div class="ph" style="min-height:100%; border:0; border-radius:0;">
+                            <div><strong>BEFORE</strong><br>Old UI / wireframe</div>
+                        </div>
+                    </div>
+
+                    <div class="ba-handle"></div>
+                </div>
+
+                <div class="ba-meta">
+                    <b>Example: Hero / Section redesign</b>
+                    <span>Drag slider to show UI improvements (hierarchy, spacing, readability, conversion).</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>Results (edit these numbers)</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="results">
+                <div class="r"><b>+X%</b><span>Conversion / CTA clicks</span></div>
+                <div class="r" style="background: var(--gradient-3);"><b>AA</b><span>Accessibility target</span></div>
+                <div class="r" style="background: var(--gradient-1);"><b>Fast</b><span>Optimized images + layout</span>
+                </div>
+                <div class="r" style="background: var(--gradient-5);"><b>100%</b><span>Responsive sections</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / CTA -->
+    <section id="contact" class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-head">
+                <h2>Contact</h2>
+                <div class="rule"></div>
+            </div>
+
+            <div class="card">
+                <div class="pad"
+                    style="display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; align-items:center;">
+                    <div>
+                        <div class="eyebrow"><span class="dot"></span> Want something like this?</div>
+                        <p class="lead" style="max-width: 70ch;">
+                            I can design and build modern websites with strong sections, interactions, and clean UI
+                            systems.
+                        </p>
+                    </div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <a class="btn" href="mailto:you@email.com"><i class="fa-solid fa-envelope"></i> Email Me</a>
+                        <a class="btn secondary" href="https://daob.sa/" target="_blank" rel="noreferrer">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Daob
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <footer style="margin-top:22px;">
+                <div class="container" style="padding:0;">
+                    © <span id="year"></span> Your Name. All rights reserved.
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lb-inner" role="dialog" aria-modal="true" aria-label="Image preview">
+            <div class="lb-top">
+                <b id="lbTitle">Preview</b>
+                <button class="lb-close" id="lbClose" type="button">Close</button>
+            </div>
+            <div class="lb-media">
+                <img id="lbImg" alt="Preview image" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme toggle (same idea as your code)
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme') || 'light';
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        const savedTheme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // Lightbox: any element with [data-lightbox]
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbTitle = document.getElementById('lbTitle');
+        const lbClose = document.getElementById('lbClose');
+
+        function openLB(src, title) {
+            lbImg.src = src;
+            lbTitle.textContent = title || 'Preview';
+            lb.classList.add('open');
+            lb.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLB() {
+            lb.classList.remove('open');
+            lb.setAttribute('aria-hidden', 'true');
+            lbImg.src = '';
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', (e) => {
+            const el = e.target.closest('[data-lightbox]');
+            if (!el) return;
+
+            const full = el.getAttribute('data-full');
+            const title = el.getAttribute('data-title') || 'Preview';
+            const img = el.querySelector('img');
+            const src = full || (img ? img.src : null);
+
+            if (src) openLB(src, title);
+        });
+
+        lbClose.addEventListener('click', closeLB);
+        lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLB(); });
+
+        // Before/After sliders
+        document.querySelectorAll('[data-comparison]').forEach(slider => {
+            const handle = slider.querySelector('.ba-handle');
+            const before = slider.querySelector('.ba-before');
+            let dragging = false;
+
+            function setPos(x) {
+                const rect = slider.getBoundingClientRect();
+                const pct = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+                handle.style.left = pct + '%';
+                before.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+            }
+
+            slider.addEventListener('pointerdown', (e) => { dragging = true; slider.setPointerCapture(e.pointerId); setPos(e.clientX); });
+            slider.addEventListener('pointermove', (e) => { if (dragging) setPos(e.clientX); });
+            slider.addEventListener('pointerup', () => dragging = false);
+            slider.addEventListener('pointercancel', () => dragging = false);
+        });
+    </script>
+</body>
+
+</html>
