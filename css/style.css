@@ -629,9 +629,7 @@
       grid-column: span 2;
   }
 
-  .project-card.featured .project-img {
-      aspect-ratio: 21/9;
-  }
+
 
   .project-badge {
       position: absolute;
