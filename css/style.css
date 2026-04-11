@@ -189,7 +189,7 @@
       transform: translateY(-9px) rotate(-45deg);
   }
 
-  /* Mobile Menu Overlay */
+  /* Mobile Menu  */
   .nav-mobile-menu {
       position: fixed;
       top: 0;
@@ -237,7 +237,7 @@
       color: var(--gray-600);
   }
 
-  /* Mobile menu close button */
+
   .mobile-menu-close {
       position: absolute;
       top: 1.25rem;
@@ -249,7 +249,7 @@
       color: var(--black);
   }
 
-  /* Overlay background when menu is open */
+
   .mobile-overlay {
       position: fixed;
       top: 0;
@@ -268,7 +268,7 @@
       visibility: visible;
   }
 
-  /* Desktop nav links hidden on mobile */
+
   @media (max-width: 768px) {
       .nav-links {
           display: none !important;
@@ -294,7 +294,6 @@
       }
   }
 
-  /* Ensure nav has proper spacing for mobile */
   nav {
       justify-content: space-between;
       align-items: center;
@@ -310,7 +309,7 @@
       display: none;
   }
 
-  /* HERO with Canvas BG */
+  /* HERO  */
   .hero {
       position: relative;
       min-height: 100vh;
@@ -654,7 +653,6 @@
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
 
-  /* UPDATED PROJECT IMAGE STYLES */
   .project-img {
       width: 100%;
       aspect-ratio: 16/10;
@@ -675,7 +673,7 @@
       transform: scale(1.08);
   }
 
-  /* Fallback placeholder when no image */
+
   .project-img-placeholder {
       width: 100%;
       height: 100%;
@@ -702,7 +700,6 @@
       opacity: 0.9;
   }
 
-  /* Image overlay for gradient effect */
   .project-img-overlay {
       position: absolute;
       bottom: 0;
@@ -715,12 +712,8 @@
       transition: opacity 0.3s ease;
   }
 
-  /* Invert specific logos on light theme */
-  body[data-theme="light"] .project-card.invert-on-light .project-img img {
-      filter: invert(1) brightness(1.2);
-  }
 
-  /* Also handle the placeholder fallback */
+
   body[data-theme="light"] .project-card.invert-on-light .project-img-placeholder {
       filter: invert(1) brightness(1.2);
   }
@@ -946,7 +939,7 @@
       color: var(--gray-600);
   }
 
-  /* SKILLS SECTION - 4 CARDS WITH IMAGE ICONS */
+  /* SKILLS SECTION  */
   .skills-wrapper {
       width: 100%;
   }
@@ -969,7 +962,6 @@
       color: var(--gray-600);
   }
 
-  /* 4 CARDS GRID */
   .skills-categories {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1012,7 +1004,6 @@
       margin-bottom: 1.5rem;
   }
 
-  /* IMAGE ICON STYLES - same size as original icons (52x52px container) */
   .skill-category-icon {
       width: 100%;
       height: 100%;
@@ -1024,7 +1015,6 @@
 
   }
 
-  /* The actual image icon - same dimensions as the icon container */
   .skill-icon-img {
       width: 100%;
       height: 100%;

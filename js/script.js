@@ -1,5 +1,4 @@
 
-// Mobile Navigation JavaScript
 (function () {
     const toggleBtn = document.getElementById('mobileMenuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -33,12 +32,10 @@
         overlay.addEventListener('click', closeMenu);
     }
 
-    // Close menu when clicking a mobile nav link
     const mobileLinks = document.querySelectorAll('.nav-mobile-links a');
     mobileLinks.forEach(link => {
         link.addEventListener('click', function (e) {
             closeMenu();
-            // Smooth scroll to section
             const targetId = this.getAttribute('href');
             if (targetId && targetId !== '#') {
                 e.preventDefault();
@@ -50,15 +47,96 @@
         });
     });
 
-    // Handle window resize - close menu if screen becomes desktop
     window.addEventListener('resize', function () {
         if (window.innerWidth > 768) {
             closeMenu();
         }
     });
 })();
+function processImage(img) {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
 
-// Theme Toggle
+    const apply = () => {
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+
+        canvas.style.width = "100%";
+        canvas.style.height = "auto";
+        canvas.style.display = "block";
+        canvas.style.objectFit = "contain";
+
+        canvas.className = img.className;
+
+        for (let i = 0; i < img.attributes.length; i++) {
+            const attr = img.attributes[i];
+            if (attr.name.startsWith('data-')) {
+                canvas.setAttribute(attr.name, attr.value);
+            }
+        }
+
+        ctx.drawImage(img, 0, 0);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const saturation = max === 0 ? 0 : (max - min) / max;
+            const luminance = (max + min) / 2;
+
+            const isGreenDominant = g > r * 1.3 && g > b * 1.3 && g > 80;
+
+            const isLightColor = luminance > 180 && saturation < 0.3;
+
+            const isBrightColor = luminance > 180 && saturation > 0.5;
+
+            if (isLightColor) {
+                data[i] = 0;
+                data[i + 1] = 0;
+                data[i + 2] = 0;
+            } else if (isBrightColor && !isGreenDominant) {
+                const darkenFactor = 0.3;
+                data[i] = Math.floor(r * darkenFactor);
+                data[i + 1] = Math.floor(g * darkenFactor);
+                data[i + 2] = Math.floor(b * darkenFactor);
+            }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+        img.parentNode.replaceChild(canvas, img);
+    };
+
+    if (img.complete && img.naturalWidth > 0) {
+        apply();
+    } else {
+        img.onload = apply;
+    }
+}
+
+function applyImageProcessing() {
+    const body = document.body;
+    const currentTheme = body.getAttribute('data-theme');
+    const logoContainers = document.querySelectorAll('.project-card.invert-on-light .project-img');
+
+    if (currentTheme === 'light') {
+        logoContainers.forEach(container => {
+            const img = container.querySelector('img');
+            if (img && !img.dataset.processed) {
+                img.dataset.originalSrc = img.src;
+                processImage(img);
+                img.dataset.processed = 'true';
+            }
+        });
+    }
+}
+
 function toggleTheme() {
     const body = document.body;
     const currentTheme = body.getAttribute('data-theme');
@@ -68,20 +146,20 @@ function toggleTheme() {
     slider.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     localStorage.setItem('theme', newTheme);
     updateCanvasTheme(newTheme);
+
+    location.reload();
 }
 
-// Update canvas colors based on theme
 function updateCanvasTheme(theme) {
     if (window.heroUniforms) {
         const isDark = theme === 'dark';
-        const bgColor = isDark ? [0.0, 0.0, 0.0] : [1.0, 1.0, 1.0]; // Black for dark, white for light
-        const lineColor = isDark ? [1.0, 1.0, 1.0] : [0.3, 0.8, 1.0]; // White for dark, cyan for light
+        const bgColor = isDark ? [0.0, 0.0, 0.0] : [1.0, 1.0, 1.0];
+        const lineColor = isDark ? [1.0, 1.0, 1.0] : [0.3, 0.8, 1.0];
         window.heroUniforms.setBg(bgColor);
         window.heroUniforms.setLine(lineColor);
     }
 }
 
-// Initialize WebGL Canvas Background for Hero
 function initHeroCanvas(initialTheme) {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
@@ -102,7 +180,7 @@ function initHeroCanvas(initialTheme) {
     attribute vec2 position;
     void main() {
         gl_Position = vec4(position, 0.0, 1.0);
-            }
+    }
     `;
 
     const fsSource = `
@@ -113,39 +191,39 @@ function initHeroCanvas(initialTheme) {
     uniform vec3 u_lineColor;
 
     float sineNoise(vec2 p) {
-                return sin(p.x) * cos(p.y);
-            }
+        return sin(p.x) * cos(p.y);
+    }
 
     float multiFlow(vec2 p) {
         float t = time * 0.1;
-    float flow = 0.0;
-    flow += 0.5 * sineNoise(p + vec2(t, 0.0));
-    flow += 0.25 * sineNoise(p * 1.8 - vec2(0.0, t * 1.2));
-    flow += 0.15 * sineNoise(p * 3.5 + vec2(t * 0.7, t * 0.4));
-    flow += 0.10 * sineNoise(p * 6.0 - vec2(t * 0.9, t * 1.5));
-    return flow;
-            }
+        float flow = 0.0;
+        flow += 0.5 * sineNoise(p + vec2(t, 0.0));
+        flow += 0.25 * sineNoise(p * 1.8 - vec2(0.0, t * 1.2));
+        flow += 0.15 * sineNoise(p * 3.5 + vec2(t * 0.7, t * 0.4));
+        flow += 0.10 * sineNoise(p * 6.0 - vec2(t * 0.9, t * 1.5));
+        return flow;
+    }
 
     void main() {
         vec2 uv = gl_FragCoord.xy / resolution.xy;
-    uv = uv * 2.0 - 1.0;
-    uv.x *= resolution.x / resolution.y;
-    vec2 p = uv * 2.5;
-    float flow = multiFlow(p);
-    p.y += flow * 0.20;
-    float curve = sin(p.x * 2.2 + time * 0.5) * 0.17;
-    float dist = abs(p.y - curve);
-    float core = exp(-dist * 32.0);
-    float glow = exp(-dist * 9.0) * 0.6;
-    float intensity = core + glow;
-    float edgeFade = smoothstep(1.3, 0.1, abs(uv.x));
-    intensity *= edgeFade;
-    float vFade = smoothstep(1.0, 0.7, abs(uv.y));
-    intensity *= vFade;
+        uv = uv * 2.0 - 1.0;
+        uv.x *= resolution.x / resolution.y;
+        vec2 p = uv * 2.5;
+        float flow = multiFlow(p);
+        p.y += flow * 0.20;
+        float curve = sin(p.x * 2.2 + time * 0.5) * 0.17;
+        float dist = abs(p.y - curve);
+        float core = exp(-dist * 32.0);
+        float glow = exp(-dist * 9.0) * 0.6;
+        float intensity = core + glow;
+        float edgeFade = smoothstep(1.3, 0.1, abs(uv.x));
+        intensity *= edgeFade;
+        float vFade = smoothstep(1.0, 0.7, abs(uv.y));
+        intensity *= vFade;
 
-    vec3 color = mix(u_bgColor, u_lineColor, intensity);
-    gl_FragColor = vec4(color, 1.0);
-            }
+        vec3 color = mix(u_bgColor, u_lineColor, intensity);
+        gl_FragColor = vec4(color, 1.0);
+    }
     `;
 
     function createShader(type, src) {
@@ -200,18 +278,22 @@ function initHeroCanvas(initialTheme) {
     requestAnimationFrame(render);
 }
 
-// Load saved theme and init
-// Load saved theme and init
 window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme') || 'dark'; // 👈 default is now dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
     document.body.setAttribute('data-theme', savedTheme);
 
     const slider = document.querySelector('.theme-toggle-slider');
     slider.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
     initHeroCanvas(savedTheme);
+
+    if (savedTheme === 'light') {
+        setTimeout(() => {
+            applyImageProcessing();
+        }, 100);
+    }
 });
-// Smooth scroll for navigation
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -220,14 +302,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Scroll animations
 const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, observerOptions);
 document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-// Before/After slider functionality
 document.querySelectorAll('[data-comparison]').forEach(container => {
     const handle = container.querySelector('.ba-slider-handle');
     const beforeDiv = container.querySelector('.ba-preview-before');
@@ -250,7 +330,7 @@ document.querySelectorAll('[data-comparison]').forEach(container => {
     document.addEventListener('touchmove', drag);
 });
 
-// Animate skill bars on scroll
+
 const skillBarsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -274,8 +354,5 @@ function loadComponent(id, file) {
             document.getElementById(id).innerHTML = data;
         });
 }
-
-
-
 
 document.getElementById('year').textContent = new Date().getFullYear();
