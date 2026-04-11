@@ -1182,7 +1182,7 @@
   }
 
   .contact-inner {
-      display: grid;
+      /* display: grid; */
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
       align-items: start;
@@ -1267,6 +1267,13 @@
   .footer-logo img {
       width: 50px;
       transition: filter 0.3s ease;
+      color: inherit;
+
+  }
+
+  .footer-logo {
+      text-decoration: none;
+      color: inherit;
   }
 
   .footer-copy {
